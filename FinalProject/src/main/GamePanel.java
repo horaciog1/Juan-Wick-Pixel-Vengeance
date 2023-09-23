@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}// end constructor
 
-
+	// clock that gives life to the game
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
