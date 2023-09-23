@@ -87,6 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
 //		} // end while
 //		
 //	} // end run()
+//
 	
 	public void run() {
 		double drawInterval = 1000000000 / FPS;
