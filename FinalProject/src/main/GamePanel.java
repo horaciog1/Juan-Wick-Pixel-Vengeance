@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.black);
+		this.setBackground(Color.white);
 		
 		// all the drawing from this component will be done in an off-screen painting buffer
 		// it can basically improve rendering performance
