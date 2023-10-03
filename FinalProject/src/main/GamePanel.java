@@ -13,12 +13,16 @@ import entity.Player;
 public class GamePanel extends JPanel implements Runnable{
 
 	// Screen Settings
-	final int originalTileSize = 16;   // 16x16 tile
+	final int originalTileSizeWidth = 15;   // 15x22 tile
+	final int originalTileSizeHeight = 22;
 	final int scale = 3;
 	
-	public final int tileSize = originalTileSize * scale;   // 48*48 tile
-	final int maxScreenCol = 19;
-	final int maxScreenRow = 15;
+	public final int tileSizeWidth = originalTileSizeWidth * scale;   // depends on scale
+	public final int tileSizeHeight = originalTileSizeHeight * scale;
+	public final int tileSize = tileSizeHeight;
+
+	final int maxScreenCol = 18;
+	final int maxScreenRow = 14;
 	final int screenWidth = tileSize * maxScreenCol;   // 912 pixels
 	final int screenHeight = tileSize * maxScreenRow;   // 720 pixels
 	
@@ -40,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.black);
+		this.setBackground(Color.white);
 		
 		// all the drawing from this component will be done in an off-screen painting buffer
 		// it can basically improve rendering performance

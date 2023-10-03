@@ -1,7 +1,10 @@
 package entity;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
@@ -18,6 +21,8 @@ public class Player extends Entity{
 		this.keyH = keyH;
 		
 		setDefaultValues();
+		getPlayerImage();
+		
 		
 	} // end Player()
 	
@@ -26,32 +31,146 @@ public class Player extends Entity{
 		x = 100;
 		y = 100;
 		speed = 4;
+		direction = "down";
 		
 	} // end setDefaultValues()
 	
+	public void getPlayerImage() {
+		try {
+			
+			up0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_up_0.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_up_1.png"));
+			down0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_down_0.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_down_1.png"));
+			left0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_left_0.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_left_1.png"));
+			right0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_0.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_1.png"));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}// end getPlayerImage()
+	
 	public void update() {
 		
-		if (keyH.upPressed == true) {
-			y -= speed;
-		}
-		else if (keyH.downPressed == true) {
-			y += speed;
-		}
-		else if (keyH.leftPressed == true) {
-			x -= speed;
-		}
-		else if (keyH.rightPressed == true) {
-			x += speed;
+		// this is going to stop the changing of the sprite while is not moving
+		if(keyH.upPressed == true || keyH.downPressed == true || 
+				keyH.leftPressed == true || keyH.rightPressed == true ) {
+
+			if (keyH.upPressed == true) {
+				direction = "up";
+				y -= speed;
+			}
+			else if (keyH.downPressed == true) {
+				direction = "down";
+				y += speed;
+			}
+			else if (keyH.leftPressed == true) {
+				direction = "left";
+				x -= speed;
+			}
+			else if (keyH.rightPressed == true) {
+				direction = "right";
+				x += speed;
+			}
 			
-		}
+			spriteCounter++;
+			if (spriteCounter > 12 ) {
+				if (spriteNum == 1) {
+					spriteNum = 2;
+				}
+				else if (spriteNum ==2) {
+					spriteNum = 1;
+				}
+				spriteCounter = 0;
+			} // end if spriteCounter > 12
+			
+		} // end if to stop moving
 	} // end update()
 	
 	public void draw(Graphics2D g2) {
 		
-		g2.setColor(Color.white);
+//		g2.setColor(Color.white);
+//		g2.fillRect(x, y, gp.tileSizeWidth, gp.tileSizeHeight);
 		
-		g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+		
+		BufferedImage image = null;
+		
+		switch(direction) {
+		
+		case "up":
+			if(spriteNum == 1) {
+				image = up0;
+			}
+			if (spriteNum == 2) {
+				image = up1;
+			}
+			break;
+			
+		case "down":
+			if (spriteNum == 1) {
+				image = down0;
+			}
+			if (spriteNum == 2) {
+				image = down1;
+			}
+			break;
+			
+		case "left":
+			if (spriteNum == 1) {
+				image = left0;
+			}
+			if (spriteNum == 2) {
+				image = left1;
+			}
+			break;
+			
+		case "right":
+			if (spriteNum == 1) {
+				image = right0;
+			}
+			if (spriteNum == 2) {
+				image = right1;
+			}
+			break;
+			
+		} // end switch
+		
+		g2.drawImage(image, x, y, gp.tileSizeWidth, gp.tileSizeHeight, null);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	} // end draw()
 	
 } // end class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
