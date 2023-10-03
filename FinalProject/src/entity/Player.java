@@ -50,7 +50,7 @@ public class Player extends Entity{
 		
 		g2.setColor(Color.white);
 		
-		g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+		g2.fillRect(x, y, gp.tileSizeWidth, gp.tileSizeHeight);
 		
 	} // end draw()
 	
