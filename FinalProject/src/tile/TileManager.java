@@ -23,7 +23,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("/maps/examplegit.txt");
+		loadMap("/maps/example.txt");
 	}//End TileManager
 	
 	//Declaration and import of the textures or tiles.
