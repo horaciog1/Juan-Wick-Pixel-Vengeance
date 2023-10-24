@@ -65,8 +65,5 @@ public class CollisionChecker {
 			}
 			break;	
 		} // end switch
-		
 	}// end checkTile()
-	
-	
 } // end class
