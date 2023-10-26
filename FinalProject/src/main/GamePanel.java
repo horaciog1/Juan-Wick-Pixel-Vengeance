@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Object.SuperObject;
 import entity.Player;
-import object.SuperObject;
 import tile.TileManager;
 
 @SuppressWarnings("serial")
@@ -38,22 +38,34 @@ public class GamePanel extends JPanel implements Runnable{
 	// FPS
 	int FPS = 60;
 
+	//SYSTEM
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler();
+	KeyHandler keyH = new KeyHandler(this); 
 	Thread gameThread;
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
+	public UI ui = new UI(this);
+	
+	// ENTITY AND OBJECT
 	public Player player = new Player(this, keyH);
+	public SuperObject obj[] = new SuperObject[10];  //10 slots for objects
 	
-	// objects that can be displayed at the same time, it can be change any time to display more objects
-	public SuperObject obj[] = new SuperObject [12];
+	//GAME STATE
+	public int gameState;
+	public final int titleState = 0;
+	public final int playState = 1;
+	public final int pauseState = 2;
 	
+	// Set player's default position
+	int playerX = 100;
+	int playerY = 100;
+	int playerSpeed = 4;
 	
 	
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.black);
+		this.setBackground(Color.white);
 		
 		// all the drawing from this component will be done in an off-screen painting buffer
 		// it can basically improve rendering performance
@@ -62,17 +74,14 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);	// With this, this GamePanel can be "focused" to receive key input
 		
 	}// end constructor
+
 	
-	
-	// This places the objects into the map before the game loads
 	public void setupGame() {
 		
-		
-		// We create this method so we can add other stuff in the future
 		aSetter.setObject();
-		
-	} //  end setupGame
-
+		gameState = titleState; //changed
+	}
+	
 	// clock that gives life to the game
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -153,7 +162,12 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void update() {
 		
-		player.update();
+		if(gameState == playState) {
+			player.update();
+		}	
+		if(gameState == pauseState) {
+			//nothing for now
+		}
 		
 	}// end update()
 	
@@ -163,21 +177,30 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
-		// TILE
-		tileM.draw(g2);
+		//TITLE SCREEN
+		if(gameState == titleState) {
+			ui.draw(g2);
+		}
+		//OTHERS
+		else {
+			//TILE
+			tileM.draw(g2);
+			
+			//OBJECT
+			for(int i = 0; i < obj.length; i++) {
+				if(obj[i] != null) {
+					obj[i].draw(g2, this);
+				}
+			}
+			
+			//PLAYER
+			player.draw(g2);
+			
+			//UI
+			ui.draw(g2);
+		}
 		
-		// OBJECT
-		for(int i = 0; i < obj.length; i++) {
-			
-			if (obj[i] !=  null) {
-				obj[i].draw(g2, this);
-			}//end  if
-			
-			
-		}// end for
-		
-		// PLAYER
-		player.draw(g2);
+
 		
 		g2.dispose();	// dispose of this graphics context and release any system resources that it is using
 		
