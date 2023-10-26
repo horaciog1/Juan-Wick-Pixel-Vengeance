@@ -1,8 +1,4 @@
-/*
- * Parent class for all object classes that we will create
- */
-
-package object;
+package Object;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -12,15 +8,16 @@ import main.GamePanel;
 
 public class SuperObject {
 
+	
 	public BufferedImage image;
 	public String name;
 	public boolean collision = false;
 	public int worldX, worldY;
-	public Rectangle solidArea = new Rectangle(0, 0, 60, 60);
+	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public int solidAreaDefaultX = 0;
 	public int solidAreaDefaultY = 0;
-
 	
+	//Method to draw the objects
 	public void draw(Graphics2D g2, GamePanel gp) {
 		
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;	// Position on screen
@@ -32,8 +29,7 @@ public class SuperObject {
 		   worldY - gp.tileSize < gp.player.worldY + gp.player.screenY)	{
 			
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-		} // end if
-		
-	} // end draw
-	
-} // end class
+
+		} //end if
+	}
+}
