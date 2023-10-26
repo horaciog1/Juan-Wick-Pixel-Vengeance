@@ -21,6 +21,7 @@ public class Entity {
 	
 	// For Player's hit-box
 	public Rectangle solidArea;
+	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
 	
 	

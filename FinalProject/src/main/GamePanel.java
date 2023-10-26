@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 @SuppressWarnings("serial")
@@ -41,14 +42,12 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public CollisionChecker cChecker = new CollisionChecker(this);
+	public AssetSetter aSetter = new AssetSetter(this);
 	public Player player = new Player(this, keyH);
 	
+	// objects that can be displayed at the same time, it can be change any time to display more objects
+	public SuperObject obj[] = new SuperObject [12];
 	
-	
-	// Set player's default position
-	int playerX = 100;
-	int playerY = 100;
-	int playerSpeed = 4;
 	
 	
 	public GamePanel() {
@@ -63,6 +62,16 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);	// With this, this GamePanel can be "focused" to receive key input
 		
 	}// end constructor
+	
+	
+	// This places the objects into the map before the game loads
+	public void setupGame() {
+		
+		
+		// We create this method so we can add other stuff in the future
+		aSetter.setObject();
+		
+	} //  end setupGame
 
 	// clock that gives life to the game
 	public void startGameThread() {
@@ -154,8 +163,20 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// TILE
 		tileM.draw(g2);
 		
+		// OBJECT
+		for(int i = 0; i < obj.length; i++) {
+			
+			if (obj[i] !=  null) {
+				obj[i].draw(g2, this);
+			}//end  if
+			
+			
+		}// end for
+		
+		// PLAYER
 		player.draw(g2);
 		
 		g2.dispose();	// dispose of this graphics context and release any system resources that it is using
