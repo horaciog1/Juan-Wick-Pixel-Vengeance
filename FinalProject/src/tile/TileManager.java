@@ -23,7 +23,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("/maps/map02.txt");
+		loadMap("/maps/world01.txt");
 	}//End TileManager
 	
 	//Declaration and import of the textures or tiles.
@@ -40,17 +40,16 @@ public class TileManager {
 			tile[1].collision = true;
 			
 			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WhiteFloor.png"));		// Window Tile
+			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));		// Window Tile
 			
-			tile[3] = new Tile();
-			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WhiteWoodTile.png"));
-			
-			tile[4] = new Tile();
-			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowScreen.png"));
-			tile[4].collision = true;
-			
-			tile[5] = new Tile();
-			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
+//			tile[3] = new Tile();
+//			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
+//			
+//			tile[4] = new Tile();
+//			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
+//			
+//			tile[5] = new Tile();
+//			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
 //			
 //			tile[6] = new Tile();
 //			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
