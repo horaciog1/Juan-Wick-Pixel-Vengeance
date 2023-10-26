@@ -21,7 +21,6 @@ public class Player extends Entity{
 	int hasKey = 0;
 	
 	
-	
 	public Player (GamePanel gp, KeyHandler keyH) {
 		
 		this.gp = gp;
@@ -32,12 +31,12 @@ public class Player extends Entity{
 		
 		// Player's hit-box
 		solidArea = new Rectangle();
-		solidArea.x = 25;
-		solidArea.y = 15;
+		solidArea.x = 8;
+		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
-		solidAreaDefaultX = solidArea.y;
-		solidArea.width = 24;
-		solidArea.height = 40;
+		solidAreaDefaultY = solidArea.y;
+		solidArea.width = 32;
+		solidArea.height = 32;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -47,10 +46,15 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.tileSize * 3;
-		worldY = gp.tileSize * 6;
+		worldX = gp.tileSize * 23;
+		worldY = gp.tileSize * 21;
 		speed = 4;
 		direction = "down";
+		
+		//ADDED ADDED 
+				//PLAYER STATUS
+				//maxLife = 6;
+				//life = maxLife;
 		
 	} // end setDefaultValues()
 	
@@ -95,8 +99,7 @@ public class Player extends Entity{
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
 			
-			
-			// CHECK OBJECT COLLISION
+			//Check OBJECT COLLISION
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
 			
@@ -128,31 +131,26 @@ public class Player extends Entity{
 	
 	public void pickUpObject(int i) {
 		
-		if (i != 999) {
+		if(i != 999) {
 			
 			String objectName = gp.obj[i].name;
 			
 			switch(objectName) {
 			case "Key":
 				hasKey++;
-				gp.obj[i] = null;	// make obj disappear
+				gp.obj[i] = null;
 				System.out.println("Key:" + hasKey);
 				break;
-				
 			case "Door":
 				if(hasKey > 0) {
-					gp.obj[i] = null; // Disappear door if player has key
+					gp.obj[i] = null;
 					hasKey--;
 				}
 				System.out.println("Key:" + hasKey);
 				break;
-				
-			}// end switch
-			
-		} // end if
-		
-		
-	}// end pickUpObject
+			}
+		}
+	}
 	
 	public void draw(Graphics2D g2) {
 		
