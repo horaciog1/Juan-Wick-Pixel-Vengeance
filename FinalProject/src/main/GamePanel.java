@@ -26,6 +26,16 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxScreenRow = 14;
 	public final int screenWidth = tileSize * maxScreenCol;   // 912 pixels
 	public final int screenHeight = tileSize * maxScreenRow;   // 720 pixels
+<<<<<<< HEAD
+	
+	// WORLD SETTINGS
+	public final int maxWorldCol = 50;
+	public final int maxWorldRow = 50;
+	public final int worldWidth = tileSize * maxWorldCol;
+	public final int worldHeight = tileSize * maxWorldRow;
+
+=======
+>>>>>>> main
 	
 	// FPS
 	int FPS = 60;
@@ -33,7 +43,8 @@ public class GamePanel extends JPanel implements Runnable{
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
-	Player player = new Player(this, keyH);
+	public CollisionChecker cChecker = new CollisionChecker(this);
+	public Player player = new Player(this, keyH);
 	
 	
 	
@@ -46,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.white);
+		this.setBackground(Color.black);
 		
 		// all the drawing from this component will be done in an off-screen painting buffer
 		// it can basically improve rendering performance
