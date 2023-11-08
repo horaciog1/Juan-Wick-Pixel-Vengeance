@@ -1,5 +1,6 @@
-/*
- * 	Description
+/**
+ * The KeyHandler class plays a crucial role in managing keyboard input, detecting key presses, and handling key events
+ * within the game. It is designed to interact with the KeyListener interface, effectively facilitating key event handling.
  */
 
 package main;
@@ -17,10 +18,15 @@ public class KeyHandler implements KeyListener{
 	}
 	
 	@Override
-	// Wont be used, but it is necessary for the class to run without errors
 	public void keyTyped(KeyEvent e) {
+		// Not used, but necessary for the class to run without errors.
 	}
 
+	 /**
+     * Handles key presses and responds to various key events based on the game's state.
+     *
+     * @param e The KeyEvent representing the key press.
+     */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
@@ -75,6 +81,12 @@ public class KeyHandler implements KeyListener{
 		
 	} //  end keyPressed()
 
+	
+	/**
+     * Handles key releases and updates key event states accordingly.
+     *
+     * @param e The KeyEvent representing the key release.
+     */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		

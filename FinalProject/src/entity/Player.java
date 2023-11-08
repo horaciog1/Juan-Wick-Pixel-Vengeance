@@ -1,3 +1,8 @@
+/**
+ * The Player class represents the in-game player character. It extends the Entity class and encapsulates the player's
+ * attributes, actions, and interactions within the game world.
+ */
+
 package entity;
 
 import java.awt.Graphics2D;
@@ -12,15 +17,21 @@ import main.KeyHandler;
 
 public class Player extends Entity{
 
-	GamePanel gp;
-	KeyHandler keyH;
+	GamePanel gp; // Reference to the game panel
+    KeyHandler keyH; // Key handler for input handling
 	
-	// These wont change, player character's screen position
-	public final int screenX;
-	public final int screenY;
-	public int hasKey = 0;
+    // Fixed screen position for the player
+   	public final int screenX;
+   	public final int screenY;
+   	
+   	public int hasKey = 0; // Counter for collected keys
 	
-	
+   	/**
+     * Constructs a player character for the game.
+     *
+     * @param gp   The game panel.
+     * @param keyH The key handler for input control.
+     */
 	public Player (GamePanel gp, KeyHandler keyH) {
 		
 		this.gp = gp;
@@ -29,9 +40,9 @@ public class Player extends Entity{
 		screenX = gp.screenWidth / 2 - (gp.tileSize/2);
 		screenY = gp.screenHeight / 2 - (gp.tileSize/2);
 		
-		// Player's hit-box
+        // Initialize the player's hit-box
 		solidArea = new Rectangle();
-		solidArea.x = 8;
+		solidArea.x = 7;
 		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
@@ -44,10 +55,13 @@ public class Player extends Entity{
 		
 	} // end Player()
 	
+	/**
+	* Initializes default values for the player character.
+	*/	
 	public void setDefaultValues() {
 		
-		worldX = gp.tileSize * 23;
-		worldY = gp.tileSize * 21;
+		worldX = gp.tileSize * 3;
+		worldY = gp.tileSize * 6;
 		speed = 4;
 		direction = "down";
 		 
@@ -57,6 +71,9 @@ public class Player extends Entity{
 		
 	} // end setDefaultValues()
 	
+	/**
+	 * Loads player character images from resources.
+	 */	
 	public void getPlayerImage() {
 		try {
 			
@@ -76,12 +93,17 @@ public class Player extends Entity{
 		
 	}// end getPlayerImage()
 	
+	
+	/**
+	* Updates the player character's position, animation, and interactions.
+	*/
 	public void update() {
 		
-		// this is going to stop the changing of the sprite while is not moving
+        // Check if movement keys are pressed
 		if(keyH.upPressed == true || keyH.downPressed == true || 
 				keyH.leftPressed == true || keyH.rightPressed == true ) {
 
+            // Determine the player's current direction based on key input
 			if (keyH.upPressed == true) {
 				direction = "up";		
 			}
@@ -95,15 +117,13 @@ public class Player extends Entity{
 				direction = "right";				
 			}
 			
-			// CHECK TILE COLLISION
+			 // Check for collisions with tiles and objects
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
-			
-			//Check OBJECT COLLISION
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
 			
-			// IF COLLISION IS FALSE, PLAYER CAN MOVE
+            // If no collision, update the player's position
 			if (collisionOn == false) {
 				
 				switch(direction) {
@@ -115,6 +135,7 @@ public class Player extends Entity{
 			} // end if collisionOn
 			
 			
+            // Manage sprite animation
 			spriteCounter++;
 			if (spriteCounter > 12 ) {
 				if (spriteNum == 1) {
@@ -129,6 +150,12 @@ public class Player extends Entity{
 		} // end if to stop moving
 	} // end update()
 	
+	
+	/**
+     * Handles interactions when the player picks up objects.
+     *
+     * @param i The index of the object to pick up.
+     */
 	public void pickUpObject(int i) {
 		
 		if(i != 999) {
@@ -138,26 +165,29 @@ public class Player extends Entity{
 			switch(objectName) {
 			case "Key":
 				hasKey++;
-				gp.obj[i] = null;
+				gp.obj[i] = null;	// make obj disappear
 				System.out.println("Key:" + hasKey);
 				break;
 			case "Door":
 				if(hasKey > 0) {
-					gp.obj[i] = null;
+					gp.obj[i] = null;	// Disappear door if player has key
 					hasKey--;
 				}
 				System.out.println("Key:" + hasKey);
 				break;
-			}
-		}
-	}
+			}// end switch
+		} // end if
+	}// end pickUpObject
+	
+	
+	/**
+     * Draws the player character with the appropriate sprite image.
+     *
+     * @param g2 The graphics context.
+     */
 	
 	public void draw(Graphics2D g2) {
-		
-//		g2.setColor(Color.white);
-//		g2.fillRect(x, y, gp.tileSizeWidth, gp.tileSizeHeight);
-		
-		
+			
 		BufferedImage image = null;
 		
 		switch(direction) {
@@ -203,32 +233,6 @@ public class Player extends Entity{
 		g2.drawImage(image, screenX, screenY, gp.tileSizeWidth, gp.tileSizeHeight, null);
 		
 		
-		
-		
-		
 	} // end draw()
 	
 } // end class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

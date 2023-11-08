@@ -1,3 +1,9 @@
+/**
+ * The GamePanel class serves as the core component for game rendering and logic control.
+ * It provides the main canvas for rendering graphics, manages game parameters like tile size, screen dimensions, and frame rate,
+ * and contains the game loop, which updates the game state and renders graphics. 
+ */
+
 package main;
 
 import java.awt.Color;
@@ -17,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// Screen Settings
 	final int originalTileSizeWidth = 15;   // 15x22 tile
 	final int originalTileSizeHeight = 22;
-	final int scale = 3;
+	final int scale = 3;	// Scaling factor
 	
 	public final int tileSizeWidth = originalTileSizeWidth * scale;   // depends on scale
 	public final int tileSizeHeight = originalTileSizeHeight * scale;
@@ -35,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int worldHeight = tileSize * maxWorldRow;
 
 	
-	// FPS
+	// Frames per second
 	int FPS = 60;
 
 	//SYSTEM
@@ -48,7 +54,9 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// ENTITY AND OBJECT
 	public Player player = new Player(this, keyH);
-	public SuperObject obj[] = new SuperObject[10];  //10 slots for objects
+	
+	// objects that can be displayed at the same time, it can be change any time to display more objects
+	public SuperObject obj[] = new SuperObject[11];  //11 slots for objects
 	
 	//GAME STATE
 	public int gameState;
@@ -56,14 +64,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int playState = 1;
 	public final int pauseState = 2;
 	
-	// Set player's default position
-	int playerX = 100;
-	int playerY = 100;
-	int playerSpeed = 4;
-	
 	
 	public GamePanel() {
 		
+        // Set the preferred size of the game panel
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
 		
@@ -76,11 +80,12 @@ public class GamePanel extends JPanel implements Runnable{
 	}// end constructor
 
 	
+	// This places the objects into the map before the game loads
 	public void setupGame() {
 		
-		aSetter.setObject();
+		aSetter.setObject();	// Place objects into the map
 		gameState = titleState; //changed
-	}
+	} //  end setupGame
 	
 	// clock that gives life to the game
 	public void startGameThread() {
@@ -160,6 +165,8 @@ public class GamePanel extends JPanel implements Runnable{
 		} // end while
 	} // end run()
 	
+	
+	// Update game elements
 	public void update() {
 		
 		if(gameState == playState) {
@@ -167,10 +174,12 @@ public class GamePanel extends JPanel implements Runnable{
 		}	
 		if(gameState == pauseState) {
 			//nothing for now
-		}
+		} // end if
 		
 	}// end update()
 	
+	
+	// Paint component to render the game
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
@@ -180,7 +189,8 @@ public class GamePanel extends JPanel implements Runnable{
 		//TITLE SCREEN
 		if(gameState == titleState) {
 			ui.draw(g2);
-		}
+		} // end if
+		
 		//OTHERS
 		else {
 			//TILE
@@ -190,15 +200,15 @@ public class GamePanel extends JPanel implements Runnable{
 			for(int i = 0; i < obj.length; i++) {
 				if(obj[i] != null) {
 					obj[i].draw(g2, this);
-				}
-			}
+				} // end if
+			} // end for
 			
 			//PLAYER
 			player.draw(g2);
 			
 			//UI
 			ui.draw(g2);
-		}
+		} // end else
 		
 
 		

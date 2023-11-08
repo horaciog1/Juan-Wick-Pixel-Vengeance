@@ -1,3 +1,7 @@
+/*
+ * Parent class for all object classes that we will create
+ */
+
 package object;
 
 import java.awt.Graphics2D;
@@ -33,5 +37,5 @@ public class SuperObject {
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
 		} //end if
-	}
-}
+	} // end draw()
+} // end class
