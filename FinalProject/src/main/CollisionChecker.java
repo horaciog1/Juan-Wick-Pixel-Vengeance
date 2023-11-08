@@ -1,3 +1,7 @@
+/**
+ * The CollisionChecker class is responsible for handling collision detection in the game.
+ * It checks collisions between game entities and tiles and also checks if the player is hitting any objects.
+ */
 package main;
 
 import entity.Entity;
@@ -6,19 +10,30 @@ public class CollisionChecker {
 
 	GamePanel gp;
 	
-	// constructor
+	/**
+     * Constructs a CollisionChecker with the provided GamePanel instance.
+     * 
+     * @param gp The GamePanel instance for collision checking.
+     */
 	public CollisionChecker (GamePanel gp) {
 		this.gp = gp;
 	} // end constructor
 	
+	
+	/**
+     * Checks for collision between an entity and tiles based on the entity's direction.
+     * 
+     * @param entity The entity to check for tile collisions.
+     */
 	public void checkTile(Entity entity) {
 		
+        // Calculate world positions of the entity's sides.
 		int entityLeftWorldX = entity.worldX + entity.solidArea.x;
 		int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
 		int entityTopWorldY = entity.worldY + entity.solidArea.y;
 		int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height;
 		
-		
+        // Calculate the column and row in the world grid.
 		int entityLeftCol = entityLeftWorldX / gp.tileSize;
 		int entityRightCol = entityRightWorldX / gp.tileSize;
 		int entityTopRow = entityTopWorldY / gp.tileSize;;
@@ -68,8 +83,13 @@ public class CollisionChecker {
 	}// end checkTile()
 	
 	
-	//
-	public int checkObject(Entity entity, boolean player) {
+	/**
+     * Checks if an entity is hitting any objects, such as keys or doors.
+     * 
+     * @param entity The entity to check for object collisions.
+     * @param player A boolean flag indicating if the entity is the player.
+     * @return The index of the object if a collision occurs, or 999 if no collision occurs.
+     */	public int checkObject(Entity entity, boolean player) {
 		
 		
 		int index = 999;
@@ -137,6 +157,7 @@ public class CollisionChecker {
 					
 				} // end switch
 				
+                // Reset positions after collision checks
 				entity.solidArea.x = entity.solidAreaDefaultX;
 				entity.solidArea.y = entity.solidAreaDefaultY;
 				gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;

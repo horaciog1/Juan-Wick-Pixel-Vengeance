@@ -1,3 +1,8 @@
+/**
+ * The `GamePanel` class serves as the core component for game rendering and logic control.
+ * It provides the main canvas for rendering graphics, manages game parameters like tile size, screen dimensions, and frame rate,
+ * and contains the game loop, which updates the game state and renders graphics. 
+ */
 package main;
 
 import java.awt.Color;
@@ -17,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// Screen Settings
 	final int originalTileSizeWidth = 15;   // 15x22 tile
 	final int originalTileSizeHeight = 22;
-	final int scale = 3;
+	final int scale = 3; // Scaling factor
 	
 	public final int tileSizeWidth = originalTileSizeWidth * scale;   // depends on scale
 	public final int tileSizeHeight = originalTileSizeHeight * scale;
@@ -35,9 +40,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int worldHeight = tileSize * maxWorldRow;
 
 	
-	// FPS
+	// Frames per second
 	int FPS = 60;
 
+	//SYSTEM
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
@@ -52,12 +58,15 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public GamePanel() {
 		
+        // Set the preferred size of the game panel
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
 		
 		// all the drawing from this component will be done in an off-screen painting buffer
 		// it can basically improve rendering performance
 		this.setDoubleBuffered(true);   
+		
+        // Add key listener to the game panel for receiving user input
 		this.addKeyListener(keyH);
 		this.setFocusable(true);	// With this, this GamePanel can be "focused" to receive key input
 		
@@ -69,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		
 		// We create this method so we can add other stuff in the future
-		aSetter.setObject();
+		aSetter.setObject(); // Place objects into the map
 		
 	} //  end setupGame
 
@@ -151,12 +160,15 @@ public class GamePanel extends JPanel implements Runnable{
 		} // end while
 	} // end run()
 	
+	// Update game elements
 	public void update() {
 		
 		player.update();
 		
 	}// end update()
 	
+	
+	// Paint component to render the game
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
