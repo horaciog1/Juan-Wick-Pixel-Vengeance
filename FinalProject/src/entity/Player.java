@@ -18,7 +18,7 @@ public class Player extends Entity{
 	// These wont change, player character's screen position
 	public final int screenX;
 	public final int screenY;
-	int hasKey = 0;
+	public int hasKey = 0;
 	
 	
 	public Player (GamePanel gp, KeyHandler keyH) {
@@ -50,11 +50,10 @@ public class Player extends Entity{
 		worldY = gp.tileSize * 21;
 		speed = 4;
 		direction = "down";
-		
-		//ADDED ADDED 
-				//PLAYER STATUS
-				//maxLife = 6;
-				//life = maxLife;
+		 
+		//PLAYER STATUS
+		maxLife = 6;
+		life = maxLife;
 		
 	} // end setDefaultValues()
 	
@@ -69,7 +68,8 @@ public class Player extends Entity{
 			left1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_left_1.png"));
 			right0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_0.png"));
 			right1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_1.png"));
-
+			TitleScreen = ImageIO.read(getClass().getResourceAsStream("/objects/TitleScreen.png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -201,10 +201,6 @@ public class Player extends Entity{
 		} // end switch
 		
 		g2.drawImage(image, screenX, screenY, gp.tileSizeWidth, gp.tileSizeHeight, null);
-		
-		
-		
-		
 		
 		
 		

@@ -13,7 +13,7 @@ public class Entity {
 	public int speed;
 	
 	// it describes an image with an accessible buffer of image data. (to store our image files)
-	public BufferedImage up0, up1, down0, down1, left0, left1, right0, right1;	
+	public BufferedImage up0, up1, down0, down1, left0, left1, right0, right1, TitleScreen;	
 	public String direction;
 	
 	public int spriteCounter = 0;
@@ -24,10 +24,9 @@ public class Entity {
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
 	
-	//ADDED ADDED ADDED
 	//CHARACTER STATUS
-	//public int maxLife;
-	//public int life;
+	public int maxLife;
+	public int life;
 	
 	
 } // end class

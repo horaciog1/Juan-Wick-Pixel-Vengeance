@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import Object.SuperObject;
+import object.SuperObject;
 import entity.Player;
 import tile.TileManager;
 
@@ -65,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.white);
+		this.setBackground(Color.black);
 		
 		// all the drawing from this component will be done in an off-screen painting buffer
 		// it can basically improve rendering performance
