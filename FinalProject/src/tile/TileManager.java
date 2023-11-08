@@ -27,7 +27,7 @@ public class TileManager {
 	}//End TileManager
 	
 	//Declaration and import of the textures or tiles.
-	//**********MUST BE .PNG AND STORED IN RESOUCES UNDER TILES**********
+	//**********MUST BE .PNG AND STORED IN RESOURCES UNDER TILES**********
 	public void getTileImage() {
 		
 		try { 

@@ -21,13 +21,12 @@ public class Player extends Entity{
     KeyHandler keyH; // Key handler for input handling
 	
     // Fixed screen position for the player
-	public final int screenX;
-	public final int screenY;
+   	public final int screenX;
+   	public final int screenY;
+   	
+   	public int hasKey = 0; // Counter for collected keys
 	
-	int hasKey = 0; // Counter for collected keys
-	
-	
-	/**
+   	/**
      * Constructs a player character for the game.
      *
      * @param gp   The game panel.
@@ -57,26 +56,24 @@ public class Player extends Entity{
 	} // end Player()
 	
 	/**
-    * Initializes default values for the player character.
-    */
+	* Initializes default values for the player character.
+	*/	
 	public void setDefaultValues() {
 		
 		worldX = gp.tileSize * 3;
 		worldY = gp.tileSize * 6;
 		speed = 4;
 		direction = "down";
-		
-		//ADDED ADDED 
+		 
 		//PLAYER STATUS
-		//maxLife = 6;
-		//life = maxLife;
-
+		maxLife = 6;
+		life = maxLife;
+		
 	} // end setDefaultValues()
 	
-	
 	/**
-    * Loads player character images from resources.
-    */
+	 * Loads player character images from resources.
+	 */	
 	public void getPlayerImage() {
 		try {
 			
@@ -88,7 +85,8 @@ public class Player extends Entity{
 			left1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_left_1.png"));
 			right0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_0.png"));
 			right1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_1.png"));
-
+			TitleScreen = ImageIO.read(getClass().getResourceAsStream("/objects/TitleScreen.png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -97,8 +95,8 @@ public class Player extends Entity{
 	
 	
 	/**
-    * Updates the player character's position, animation, and interactions.
-    */
+	* Updates the player character's position, animation, and interactions.
+	*/
 	public void update() {
 		
         // Check if movement keys are pressed
@@ -119,7 +117,7 @@ public class Player extends Entity{
 				direction = "right";				
 			}
 			
-            // Check for collisions with tiles and objects
+			 // Check for collisions with tiles and objects
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
 			int objIndex = gp.cChecker.checkObject(this, true);
@@ -160,7 +158,7 @@ public class Player extends Entity{
      */
 	public void pickUpObject(int i) {
 		
-		if (i != 999) {
+		if(i != 999) {
 			
 			String objectName = gp.obj[i].name;
 			
@@ -170,20 +168,15 @@ public class Player extends Entity{
 				gp.obj[i] = null;	// make obj disappear
 				System.out.println("Key:" + hasKey);
 				break;
-				
 			case "Door":
 				if(hasKey > 0) {
-					gp.obj[i] = null; // Disappear door if player has key
+					gp.obj[i] = null;	// Disappear door if player has key
 					hasKey--;
 				}
 				System.out.println("Key:" + hasKey);
 				break;
-				
 			}// end switch
-			
 		} // end if
-		
-		
 	}// end pickUpObject
 	
 	
@@ -192,8 +185,9 @@ public class Player extends Entity{
      *
      * @param g2 The graphics context.
      */
+	
 	public void draw(Graphics2D g2) {
-		
+			
 		BufferedImage image = null;
 		
 		switch(direction) {
@@ -239,15 +233,6 @@ public class Player extends Entity{
 		g2.drawImage(image, screenX, screenY, gp.tileSizeWidth, gp.tileSizeHeight, null);
 		
 		
-		
-		
-		
-		
-		
-		
-		
 	} // end draw()
 	
 } // end class
-
-

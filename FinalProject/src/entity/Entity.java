@@ -10,24 +10,24 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
 
-    public int worldX, worldY; // Current world position
-    public int speed; // Movement speed
+	public int worldX, worldY; // Current world position
+	public int speed; // Movement speed
 	
     // Sprite images for different directions
-	public BufferedImage up0, up1, down0, down1, left0, left1, right0, right1;	
-	public String direction; // Current facing direction
+	public BufferedImage up0, up1, down0, down1, left0, left1, right0, right1, TitleScreen;	
+	public String direction;  // Current facing direction
 	
-    public int spriteCounter = 0; // Counter for sprite animation
-    public int spriteNum = 1; // Total number of sprites
+	public int spriteCounter = 0; // Counter for sprite animation
+	public int spriteNum = 1; // Total number of sprites
 	
     // Hit-box for collision detection (player)
 	public Rectangle solidArea;
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	public boolean collisionOn = false; // Flag to enable collision detection
+	public boolean collisionOn = false;	// Flag to enable collision detection
 	
-	//ADDED ADDED ADDED
 	//CHARACTER STATUS
-	//public int maxLife;
-	//public int life;
+	public int maxLife;
+	public int life;
+	
 	
 } // end class
