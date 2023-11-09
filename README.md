@@ -2,7 +2,7 @@
 
 <p align="center"> Welcome to the Pixel Masters Game project repository! This repository hosts the source code for our game based on the John Wick universe.</p>
 
-[//]:# (<div align="center"><img src="Readme head.png" alt="Pixel Heads"></div>)
+<div align="center"><img src="Readme head.png" alt="Pixel Heads"></div>
 
 
 ## Table of Contents
