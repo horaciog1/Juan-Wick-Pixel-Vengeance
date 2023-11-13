@@ -10,11 +10,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JPanel;
 
-import object.SuperObject;
 import entity.Player;
+import entity.Entity;
 import tile.TileManager;
 
 @SuppressWarnings("serial")
@@ -40,23 +43,29 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int worldWidth = tileSize * maxWorldCol;
 	public final int worldHeight = tileSize * maxWorldRow;
 
+
 	
 	// Frames per second
 	int FPS = 60;
 
 	//SYSTEM
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler(this); 
-	Thread gameThread;
+	KeyHandler keyH = new KeyHandler(this);
+	Sound music = new Sound();
+	Sound se = new Sound();
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
+	public EventHandler eHandler = new EventHandler(this);
+	Thread gameThread;
 	
 	// ENTITY AND OBJECT
 	public Player player = new Player(this, keyH);
 	
 	// objects that can be displayed at the same time, it can be change any time to display more objects
-	public SuperObject obj[] = new SuperObject[11];  //11 slots for objects
+	public Entity obj[] = new Entity[11];  //11 slots for objects
+	public Entity enemy[] = new Entity[20];
+	ArrayList<Entity> entityList = new ArrayList<>();
 	
 	//GAME STATE
 	public int gameState;
@@ -84,7 +93,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame() {
 		
 		aSetter.setObject();	// Place objects into the map
+		aSetter.setEnemy();
+//		playMusic(1);
 		gameState = titleState; //changed
+		
 	} //  end setupGame
 	
 	// clock that gives life to the game
@@ -170,8 +182,19 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		if(gameState == playState) {
+			
+			// PLAYER
 			player.update();
-		}	
+			
+			// ENEMY
+			for (int i = 0; i < enemy.length; i++) {
+				if(enemy[i] != null) {
+					enemy[i].update();
+				}
+			} // end for
+			
+		}// end if
+		
 		if(gameState == pauseState) {
 			//nothing for now
 		} // end if
@@ -196,15 +219,41 @@ public class GamePanel extends JPanel implements Runnable{
 			//TILE
 			tileM.draw(g2);
 			
-			//OBJECT
+			// ADD ENTITIES TO THE LIST
+			entityList.add(player);
+
 			for(int i = 0; i < obj.length; i++) {
 				if(obj[i] != null) {
-					obj[i].draw(g2, this);
-				} // end if
-			} // end for
+					entityList.add(obj[i]);
+				}
+			} //  end for
 			
-			//PLAYER
-			player.draw(g2);
+			for(int i = 0; i < enemy.length; i++) {
+				if(enemy[i] != null) {
+					entityList.add(enemy[i]);
+				}
+			} //  end for
+			
+			// https://stackoverflow.com/questions/14154127/collections-sortlistt-comparator-super-t-method-example			
+			// SORT
+			Collections.sort(entityList, new Comparator<Entity>() {
+
+				@Override
+				public int compare(Entity e1, Entity e2) {
+					int result = Integer.compare(e1.worldY, e2.worldY);
+					return result;
+				}
+				
+			});
+			
+			// DRAW ENTITIES
+			for(int i = 0; i< entityList.size(); i++) {
+				entityList.get(i).draw(g2);
+			}// end for
+			
+			// EMPTY ENTITY LIST
+			entityList.clear();
+
 			
 			//UI
 			ui.draw(g2);
@@ -216,4 +265,44 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		
 	}// paintComponent()
+	
+	
+	// Method to play the music of the background
+	public void playMusic(int i) {
+		music.setFile(i);
+		music.play();
+		music.loop();
+	} // end playMusic
+	
+	
+	public void stopMusic() {
+		music.stop();
+	} // end stopMusic
+	
+	// This takes care of playing Sound Effects
+	public void playSE(int i) {
+		se.setFile(i); // 
+		se.play();
+	} // end playSE
+	
+	
+	
+	
 } // end class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
