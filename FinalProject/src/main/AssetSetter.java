@@ -5,8 +5,9 @@
  */
 package main;
 
-import object.OBJ_Door;
-import object.OBJ_Key;
+import enemy.ENEM_Ninja;
+//import object.OBJ_Door;
+//import object.OBJ_Key;
 
 public class AssetSetter {
 
@@ -27,51 +28,28 @@ public class AssetSetter {
      * Initializes and sets the initial positions of objects in the game map.
      */	
 	public void setObject() {
-		
-        // Creating Key objects and setting their positions
-		gp.obj[0] = new OBJ_Key(gp);
-		gp.obj[0].worldX = 10 * gp.tileSize;
-		gp.obj[0].worldY = 2 * gp.tileSize;
-
-		gp.obj[1] = new OBJ_Key(gp);
-		gp.obj[1].worldX = 26 * gp.tileSize;
-		gp.obj[1].worldY = 10 * gp.tileSize;
-		
-		gp.obj[2] = new OBJ_Key(gp);
-		gp.obj[2].worldX = 47 * gp.tileSize;
-		gp.obj[2].worldY = 12 * gp.tileSize;
-		
-		gp.obj[3] = new OBJ_Key(gp);
-		gp.obj[3].worldX = 19 * gp.tileSize;
-		gp.obj[3].worldY = 18 * gp.tileSize;
-		
-		gp.obj[4] = new OBJ_Key(gp);
-		gp.obj[4].worldX = 7 * gp.tileSize;
-		gp.obj[4].worldY = 16 * gp.tileSize;
-		
-		
-		// Creating Door objects and setting their positions
-		gp.obj[5] = new OBJ_Door(gp);
-		gp.obj[5].worldX = 14 * gp.tileSize;
-		gp.obj[5].worldY = 7 * gp.tileSize;
-		
-		gp.obj[6] = new OBJ_Door(gp);
-		gp.obj[6].worldX = 29 * gp.tileSize;
-		gp.obj[6].worldY = 7 * gp.tileSize;
-		
-		gp.obj[7] = new OBJ_Door(gp);
-		gp.obj[7].worldX = 35 * gp.tileSize;
-		gp.obj[7].worldY = 13 * gp.tileSize;
-		
-		gp.obj[8] = new OBJ_Door(gp);
-		gp.obj[8].worldX = 14 * gp.tileSize;
-		gp.obj[8].worldY = 24 * gp.tileSize;
-		
-		gp.obj[9] = new OBJ_Door(gp);
-		gp.obj[9].worldX = 7 * gp.tileSize;
-		gp.obj[9].worldY = 27 * gp.tileSize;
-		
-
+//		gp.obj[0] = new OBJ_Door(gp);
+//		gp.obj[0].worldX = gp.tileSize * 14;
+//		gp.obj[0].worldY = gp.tileSize * 7;
+//		
+//		gp.obj[1] = new OBJ_Key(gp);
+//		gp.obj[1].worldX = gp.tileSize * 10;
+//		gp.obj[1].worldY = gp.tileSize * 3;
 	}// end setObject()
 	
+	
+	public void setEnemy() {
+		
+		gp.enemy[0] = new ENEM_Ninja(gp);
+		gp.enemy[0].worldX = gp.tileSize * 24;
+		gp.enemy[0].worldY = gp.tileSize * 5;
+		
+		gp.enemy[1] = new ENEM_Ninja(gp);
+		gp.enemy[1].worldX = gp.tileSize * 22;
+		gp.enemy[1].worldY = gp.tileSize * 8;
+		
+	
+		
+		
+	} // end setEnemy
 } // end class

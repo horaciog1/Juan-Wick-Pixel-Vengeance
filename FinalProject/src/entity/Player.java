@@ -5,6 +5,10 @@
 
 package entity;
 
+import java.awt.AlphaComposite;
+//import java.awt.Color;
+//import java.awt.Font;
+//import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,17 +18,17 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+//import main.UtilityTool;
 
 public class Player extends Entity{
 
-	GamePanel gp; // Reference to the game panel
     KeyHandler keyH; // Key handler for input handling
 	
     // Fixed screen position for the player
    	public final int screenX;
    	public final int screenY;
    	
-   	public int hasKey = 0; // Counter for collected keys
+   	public int hasKey = 0; // Counter for collected keys			may be deleted
 	
    	/**
      * Constructs a player character for the game.
@@ -34,7 +38,8 @@ public class Player extends Entity{
      */
 	public Player (GamePanel gp, KeyHandler keyH) {
 		
-		this.gp = gp;
+		super(gp);
+		
 		this.keyH = keyH;
 		
 		screenX = gp.screenWidth / 2 - (gp.tileSize/2);
@@ -77,19 +82,20 @@ public class Player extends Entity{
 	public void getPlayerImage() {
 		try {
 			
-			up0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_up_0.png"));
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_up_1.png"));
-			down0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_down_0.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_down_1.png"));
-			left0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_left_0.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_left_1.png"));
-			right0 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_0.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/gray_right_1.png"));
 			TitleScreen = ImageIO.read(getClass().getResourceAsStream("/objects/TitleScreen.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		up0 = setupPlayer("/player/gray_up_0");
+		up1 = setupPlayer("/player/gray_up_1");
+		down0 = setupPlayer("/player/gray_down_0");
+		down1 = setupPlayer("/player/gray_down_1");
+		left0 = setupPlayer("/player/gray_left_0");
+		left1 = setupPlayer("/player/gray_left_1");
+		right0 = setupPlayer("/player/gray_right_0");
+		right1 = setupPlayer("/player/gray_right_1");
 		
 	}// end getPlayerImage()
 	
@@ -123,6 +129,15 @@ public class Player extends Entity{
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
 			
+			// CHECK ENEMY COLLISION
+			int enemyIndex = gp.cChecker.checkEntity(this, gp.enemy);
+			contactEnemy(enemyIndex);
+			
+			
+			
+			// Check event
+			gp.eHandler.checkEvent();
+			
             // If no collision, update the player's position
 			if (collisionOn == false) {
 				
@@ -148,6 +163,17 @@ public class Player extends Entity{
 			} // end if spriteCounter > 12
 			
 		} // end if to stop moving
+		
+		
+		// This needs to be outside of key if statement!!!
+		if( invincible == true) {
+			invincibleCounter++;
+			if(invincibleCounter > 60) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		} // end if
+		
 	} // end update()
 	
 	
@@ -160,24 +186,26 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			
-			String objectName = gp.obj[i].name;
 			
-			switch(objectName) {
-			case "Key":
-				hasKey++;
-				gp.obj[i] = null;	// make obj disappear
-				System.out.println("Key:" + hasKey);
-				break;
-			case "Door":
-				if(hasKey > 0) {
-					gp.obj[i] = null;	// Disappear door if player has key
-					hasKey--;
-				}
-				System.out.println("Key:" + hasKey);
-				break;
-			}// end switch
 		} // end if
 	}// end pickUpObject
+	
+	
+	public void contactEnemy( int i) {
+		
+		if(i != 999) {
+			
+			if( invincible == false) {
+				life -= 1;
+				invincible = true;
+			} // end if
+			
+			
+		} // end if 
+	} // end  contactEnemy
+	
+	
+	
 	
 	
 	/**
@@ -230,7 +258,40 @@ public class Player extends Entity{
 			
 		} // end switch
 		
-		g2.drawImage(image, screenX, screenY, gp.tileSizeWidth, gp.tileSizeHeight, null);
+		int x = screenX;
+		int y = screenY;
+		
+		if(screenX > worldX) {
+			x = worldX;
+		}
+		
+		if(screenY > worldY) {
+			y = worldY;
+		}
+		int rightOffset = gp.screenWidth - screenX;
+		if(rightOffset > gp.worldWidth - worldX) {
+			x = gp.screenWidth - (gp.worldWidth - worldX);
+		}
+		int bottomOffset = gp.screenHeight - screenY;
+		if(bottomOffset > gp.worldHeight - worldY) {
+			y = gp.screenHeight - (gp.worldHeight - worldY);
+		}
+		
+		
+		if (invincible == true) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));		// make player transparent when invincible, he received damage
+		}
+		
+		g2.drawImage(image, x, y, null);
+		
+		// Reset alpha
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));		// make player transparent when invincible, he received damage
+
+		
+		// DEBUG
+//		g2.setFont(new Font("Arial", Font.PLAIN, 26));
+//		g2.setColor(Color.black);
+//		g2.drawString("Invincible: " + invincibleCounter , 10, 400);
 		
 		
 	} // end draw()

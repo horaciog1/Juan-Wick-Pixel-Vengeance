@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 import main.GamePanel;
+import main.UtilityTool;
 
 public class TileManager {
 
@@ -30,45 +31,36 @@ public class TileManager {
 	//**********MUST BE .PNG AND STORED IN RESOURCES UNDER TILES**********
 	public void getTileImage() {
 		
-		try { 
+		// (NUMBER,   NAME,   COLLISION)
+		setup(0, "RedWoodTile", false);
+		setup(1, "WallTile", true);
+		setup(2, "WhiteFloor", false);
+		setup(3, "WhiteWoodTile", false);
+		setup(4, "WindowScreen", true);
+		setup(5, "WindowTile", false);
 			
-			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/RedWoodTile.png"));		//Red Wood tile
-			
-			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WallTile.png"));		// Wall Tile
-			tile[1].collision = true;
-			
-			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WhiteFloor.png"));		// Window Tile
-			
-			tile[3] = new Tile();
-			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WhiteWoodTile.png"));
-			
-			tile[4] = new Tile();
-			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowScreen.png"));
-			tile[4].collision = true;
-			
-			tile[5] = new Tile();
-			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
-//			
-//			tile[6] = new Tile();
-//			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
-//			
-//			tile[7] = new Tile();
-//			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
-//			
-//			tile[8] = new Tile();
-//			tile[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
-//			
-//			tile[9] = new Tile();
-//			tile[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WindowTile.png"));
-			
-		}catch(IOException e) {
-			e.printStackTrace();
-		}//End Catch
-		
 	}//End getTileImage
+	
+	
+	public void setup(int index, String imageName, boolean collision){
+		
+		UtilityTool uTool = new UtilityTool();
+		
+		try {
+			
+			tile[index] = new Tile();
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName + ".png"));
+			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+			tile[index].collision = collision;
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	} //  end setup
+	
+	
 	
 	//Loading of Maps
 	public void loadMap(String filePath) {				//filePath String automation for multiple maps
@@ -117,14 +109,42 @@ public class TileManager {
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;	// Position on screen
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;	// Position on screen
 			
+			// Stop moving the camera at the edge
+			if(gp.player.screenX > gp.player.worldX) {
+				screenX = worldX;
+			}
+			
+			if(gp.player.screenY > gp.player.worldY) {
+				screenY = worldY;
+			}
+			int rightOffset = gp.screenWidth - gp.player.screenX;
+			if(rightOffset > gp.worldWidth - gp.player.worldX) {
+				screenX = gp.screenWidth - (gp.worldWidth - worldX);
+			}
+			int bottomOffset = gp.screenHeight - gp.player.screenY;
+			if(bottomOffset > gp.worldHeight - gp.player.worldY) {
+				screenY = gp.screenHeight - (gp.worldHeight - worldY);
+			}
+			
+			
+			
 			if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
 			   worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
 			   worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 			   worldY - gp.tileSize < gp.player.worldY + gp.player.screenY)	{
 				
-				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 
 			} //end if
+			
+			else if (gp.player.screenX > gp.player.worldX || 
+					 gp.player.screenY > gp.player.worldY ||
+					 rightOffset > gp.worldWidth - gp.player.worldX || 
+					 bottomOffset > gp.worldHeight - gp.player.worldY) {
+				
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+
+			} // end else-if
 					
 			worldCol++;
 			
