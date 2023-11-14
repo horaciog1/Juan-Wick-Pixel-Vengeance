@@ -41,12 +41,25 @@ Follow these instructions to get the Pixel Masters Game running on your local ma
 
 1. Clone the repository:
 
-   ```sh
-   git clone https://github.com/yourusername/pixel-masters-game.git
-2. Build and run the game:
-   ```sh
-   javac Main.java
-   java Main
+   ```bash
+   git clone https://github.com/NMSU-CS-CS371/cs371-fa2023-teamproject-pixel-masters.git
+
+2. Navigate to the bin folder:
+   
+   ```bash
+   cd cs371-fa2023-teamproject-pixel-masters/FinalProject/bin
+   
+3. Run the game:
+
+   ```bash
+   /Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java \
+   -Dfile.encoding=UTF-8 \
+   -Dstdout.encoding=UTF-8 \
+   -Dstderr.encoding=UTF-8 \
+   -classpath /Users/horaciogonzalez/git/cs371-fa2023-teamproject-pixel-masters/FinalProject/bin \
+   -XX:+ShowCodeDetailsInExceptionMessages main.Main
+
+
 
 ## Usage 
 
