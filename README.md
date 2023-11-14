@@ -44,12 +44,14 @@ Follow these instructions to get the Pixel Masters Game running on your local ma
    ```bash
    git clone https://github.com/NMSU-CS-CS371/cs371-fa2023-teamproject-pixel-masters.git
 
-2. Navigate to the bin folder:
+## Usage 
+
+1. Navigate to the bin folder:
    
    ```bash
    cd cs371-fa2023-teamproject-pixel-masters/FinalProject/bin
    
-3. Run the game:
+2. Run the game:
 
    ```bash
    /Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java \
@@ -58,11 +60,6 @@ Follow these instructions to get the Pixel Masters Game running on your local ma
    -Dstderr.encoding=UTF-8 \
    -classpath /Users/horaciogonzalez/git/cs371-fa2023-teamproject-pixel-masters/FinalProject/bin \
    -XX:+ShowCodeDetailsInExceptionMessages main.Main
-
-
-
-## Usage 
-
 
 ## Contributing
 
