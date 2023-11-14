@@ -46,12 +46,22 @@ Follow these instructions to get the Pixel Masters Game running on your local ma
 
 ## Usage 
 
-1. Navigate to the bin folder:
+1. Navigate to the main folder:
    
    ```bash
-   cd cs371-fa2023-teamproject-pixel-masters/FinalProject/bin
+   cd cs371-fa2023-teamproject-pixel-masters/FinalProject/
+
+2. Compile game:
+
+   ```bash
+   javac -d bin -sourcepath src src/main/Main.java
+
+3. Navigate to bin folder:
+
+   ```bash
+   cd bin/
    
-2. Run the game:
+4. Run the game:
 
    ```bash
    /Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java \
