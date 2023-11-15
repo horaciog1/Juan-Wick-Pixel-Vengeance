@@ -23,9 +23,10 @@ import tile.TileManager;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable{
 
+	// Changing these will affect player images, entity.setupPlayer(), menu image
 	// Screen Settings
 	final int originalTileSizeWidth = 15;   // 15x22 tile
-	final int originalTileSizeHeight = 22;
+	final int originalTileSizeHeight = 19;		// change to adapt to different screens, 22 to 19
 	final int scale = 3;	// Scaling factor
 	
 	public final int tileSizeWidth = originalTileSizeWidth * scale;   // depends on scale

@@ -139,7 +139,7 @@ public class UI {
 				//JUAN WICK IMAGE
 				x = gp.screenWidth/2 - (gp.tileSize*2)/2;
 				y += gp.tileSize;
-				g2.drawImage(gp.player.TitleScreen, 70, -230, 1000, 1000, null);	// x-coordinate, y-coordinate, width, height
+				g2.drawImage(gp.player.TitleScreen, -10, -260, 1000, 1000, null);	// x-coordinate, y-coordinate, width, height
 				
 				
 				

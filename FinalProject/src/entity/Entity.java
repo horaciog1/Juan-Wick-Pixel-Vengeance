@@ -196,8 +196,8 @@ public class Entity {
 		
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
-			image = uTool.scaleImage(image, gp.tileSizeWidth, gp.tileSizeHeight);
-			
+			image = uTool.scaleImage(image, gp.tileSizeWidth-4, gp.tileSizeHeight);	
+			// used to be only gp.tileSizeWidth, changed after size of window changed
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
