@@ -54,5 +54,5 @@ public class AssetSetter {
 	
 		
 		
-	} // end setEnemy
+	} //end setEnemy
 } // end class
