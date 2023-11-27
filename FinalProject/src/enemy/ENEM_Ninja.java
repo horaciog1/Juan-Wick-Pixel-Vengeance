@@ -7,8 +7,12 @@ import main.GamePanel;
 
 public class ENEM_Ninja extends Entity{
 
+	GamePanel gp;
+	
 	public ENEM_Ninja(GamePanel gp) {
 		super(gp);
+		
+		this.gp = gp;
 		
 		type = 2;
 		name = "Ninja";
@@ -31,14 +35,14 @@ public class ENEM_Ninja extends Entity{
 		
 		// setupPlayer = setup using the player size, to keep proportions of the ninjas
 		
-		up0 = setup("/enemy/ninja_up_0");
-		up1 = setup("/enemy/ninja_up_1");
-		down0 = setup("/enemy/ninja_down_0");
-		down1 = setup("/enemy/ninja_down_1");
-		right0 = setup("/enemy/ninja_right_0");
-		right1 = setup("/enemy/ninja_right_1");
-		left0 = setup("/enemy/ninja_left_0");
-		left1 = setup("/enemy/ninja_left_1");
+		up0 = setup("/enemy/ninja_up_0", gp.tileSize, gp.tileSize);
+		up1 = setup("/enemy/ninja_up_1", gp.tileSize, gp.tileSize);
+		down0 = setup("/enemy/ninja_down_0", gp.tileSize, gp.tileSize);
+		down1 = setup("/enemy/ninja_down_1", gp.tileSize, gp.tileSize);
+		right0 = setup("/enemy/ninja_right_0", gp.tileSize, gp.tileSize);
+		right1 = setup("/enemy/ninja_right_1", gp.tileSize, gp.tileSize);
+		left0 = setup("/enemy/ninja_left_0", gp.tileSize, gp.tileSize);
+		left1 = setup("/enemy/ninja_left_1", gp.tileSize, gp.tileSize);
 		
 	} // end getImage
 	
@@ -73,16 +77,14 @@ public class ENEM_Ninja extends Entity{
 		
 	} // end setAction
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void damageReaction() {
+		
+		actionLockCounter = 0;
+		direction = gp.player.direction;		// enemy will run away from player
+		
+		
+		
+	} // end damageReaction
 	
 	
 	

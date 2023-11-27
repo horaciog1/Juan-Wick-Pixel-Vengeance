@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import object.OBJ_Heart;
 import object.OBJ_Key;
@@ -16,8 +17,10 @@ public class UI {
 		Font arial_40, arial_80B;
 		BufferedImage full_heart, half_heart, empty_heart;
 		public boolean messageOn = false;
-		public String message = "";
-		int messageCounter = 0;
+		public String message1 = "";
+		int messageCounter1 = 0;
+		ArrayList <String> message = new ArrayList<>();
+		ArrayList<Integer> messageCounter = new ArrayList<>();
 		public boolean gameFinished = false;
 		public int commandNum = 0;
 		public int titleScreenState = 0;	// 0: first screen, 1: second screen
@@ -41,9 +44,9 @@ public class UI {
 			
 		}
 		
-		public void showMessage(String text) {
-			message = text;
-			messageOn = true;
+		public void addMessage(String text) {
+			message.add(text);
+			messageCounter.add(0);
 		} //  end showMessage
 		
 		public void draw(Graphics2D g2) {
@@ -60,12 +63,12 @@ public class UI {
 			if(messageOn == true) {
 				g2.setFont(g2.getFont().deriveFont(30F));
 				g2.setColor(Color.black);
-				g2.drawString(message, gp.tileSize/2, gp.tileSize*5);
+				g2.drawString(message1, gp.tileSize/2, gp.tileSize*5);
 				
-				messageCounter++;
+				messageCounter1++;
 				
-				if(messageCounter > 120) { // text disappears after 2 sec 
-					messageCounter = 0;
+				if(messageCounter1 > 120) { // text disappears after 2 sec 
+					messageCounter1 = 0;
 					messageOn = false;
 				}
 			}
@@ -77,6 +80,7 @@ public class UI {
 			//PLAY STATE
 			if(gp.gameState == gp.playState) {
 				drawPlayerLife();
+				drawMessage();
 			}
 			//PAUSE STATE
 			if(gp.gameState == gp.pauseState) {
@@ -117,6 +121,38 @@ public class UI {
 			}
 			
 		}
+		
+		
+		public void drawMessage() {
+			
+			int messageX = gp.tileSize;
+			int messageY = gp.tileSize*4;
+			g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+			
+			for (int i = 0; i < message.size(); i++) {
+				
+				if(message.get(i) != null) {
+					g2.setColor(Color.black);
+					g2.drawString(message.get(i), messageX+2, messageY+2);
+					g2.setColor(Color.white);
+					g2.drawString(message.get(i), messageX, messageY);
+					
+					int counter = messageCounter.get(i) + 1;	// messageCounter++
+					messageCounter.set(i, counter);				// set the counter to the array
+					messageY += 50;
+					
+					if(messageCounter.get(i) > 180) {
+						message.remove(i);
+						messageCounter.remove(i);
+					}
+				}
+				
+			} // end for
+			
+			
+			
+		}// end drawMessage
+		
 		public void drawTitleScreen() {
 			
 			if(titleScreenState == 0) {

@@ -88,14 +88,14 @@ public class Player extends Entity{
 			e.printStackTrace();
 		}
 		
-		up0 = setupPlayer("/player/gray_up_0");
-		up1 = setupPlayer("/player/gray_up_1");
-		down0 = setupPlayer("/player/gray_down_0");
-		down1 = setupPlayer("/player/gray_down_1");
-		left0 = setupPlayer("/player/gray_left_0");
-		left1 = setupPlayer("/player/gray_left_1");
-		right0 = setupPlayer("/player/gray_right_0");
-		right1 = setupPlayer("/player/gray_right_1");
+		up0 = setup("/player/gray_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		up1 = setup("/player/gray_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		down0 = setup("/player/gray_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		down1 = setup("/player/gray_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		left0 = setup("/player/gray_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		left1 = setup("/player/gray_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		right0 = setup("/player/gray_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		right1 = setup("/player/gray_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
 		
 	}// end getPlayerImage()
 	
@@ -196,6 +196,7 @@ public class Player extends Entity{
 		if(i != 999) {
 			
 			if( invincible == false) {
+				gp.playSE(10);
 				life -= 1;
 				invincible = true;
 			} // end if
@@ -205,6 +206,26 @@ public class Player extends Entity{
 	} // end  contactEnemy
 	
 	
+	public void damageEnemy(int i)  {
+		
+		if(i != 999) {
+			
+			if(gp.enemy[i].invincible == false) {
+				
+				gp.playSE(8);
+				gp.enemy[i].life -= 1;
+				gp.ui.addMessage("1 damage!");
+				gp.enemy[i].invincible = true;
+				gp.enemy[i].damageReaction();	
+				
+				if(gp.enemy[i].life <= 0) {
+					gp.playSE(9);
+					gp.enemy[i].dying = true;
+					gp.ui.addMessage("killed a" + gp.enemy[i].name + "!");
+				}
+			}
+		} // end if
+	} // end damageEnemy
 	
 	
 	
@@ -221,39 +242,23 @@ public class Player extends Entity{
 		switch(direction) {
 		
 		case "up":
-			if(spriteNum == 1) {
-				image = up0;
-			}
-			if (spriteNum == 2) {
-				image = up1;
-			}
+			if(spriteNum == 1) { image = up0; }
+			if (spriteNum == 2) { image = up1; }
 			break;
 			
 		case "down":
-			if (spriteNum == 1) {
-				image = down0;
-			}
-			if (spriteNum == 2) {
-				image = down1;
-			}
+			if (spriteNum == 1) { image = down0; }
+			if (spriteNum == 2) { image = down1; }
 			break;
 			
 		case "left":
-			if (spriteNum == 1) {
-				image = left0;
-			}
-			if (spriteNum == 2) {
-				image = left1;
-			}
+			if (spriteNum == 1) { image = left0; }
+			if (spriteNum == 2) { image = left1; }
 			break;
 			
 		case "right":
-			if (spriteNum == 1) {
-				image = right0;
-			}
-			if (spriteNum == 2) {
-				image = right1;
-			}
+			if (spriteNum == 1) { image = right0; }
+			if (spriteNum == 2) { image = right1; }
 			break;
 			
 		} // end switch
@@ -279,7 +284,7 @@ public class Player extends Entity{
 		
 		
 		if (invincible == true) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));		// make player transparent when invincible, he received damage
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));		// make player transparent when invincible, he received damage
 		}
 		
 		g2.drawImage(image, x, y, null);

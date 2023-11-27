@@ -19,6 +19,15 @@ public class Sound {
 		soundURL[4] = getClass().getResource("/sound/swordSlash.wav");
 		soundURL[5] = getClass().getResource("/sound/dooropen.wav");
 		soundURL[6] = getClass().getResource("/sound/coin.wav");
+		soundURL[7] = getClass().getResource("/sound/gunshot.wav");
+		soundURL[8] = getClass().getResource("/sound/hit.wav");
+		soundURL[9] = getClass().getResource("/sound/enemy_dying.wav");
+		soundURL[10] = getClass().getResource("/sound/player_damage.wav");
+
+		
+		
+		
+		
 
 	} // end constructor
 	

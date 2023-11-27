@@ -40,14 +40,17 @@ public class AssetSetter {
 	
 	public void setEnemy() {
 		
-		gp.enemy[0] = new ENEM_Ninja(gp);
-		gp.enemy[0].worldX = gp.tileSize * 24;
-		gp.enemy[0].worldY = gp.tileSize * 5;
+		int i = 0;
 		
-		gp.enemy[1] = new ENEM_Ninja(gp);
-		gp.enemy[1].worldX = gp.tileSize * 22;
-		gp.enemy[1].worldY = gp.tileSize * 8;
 		
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 24;
+		gp.enemy[i].worldY = gp.tileSize * 5;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 22;
+		gp.enemy[i].worldY = gp.tileSize * 8;
+		i++;
 	
 		
 		
