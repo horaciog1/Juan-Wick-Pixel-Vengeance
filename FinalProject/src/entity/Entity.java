@@ -52,6 +52,10 @@ public class Entity {
 	public int type;	// 0 = player, 1 = NPC (if added), 2 = enemy
 	public String name;
 	public int speed; // Movement speed
+	public int maxMana;		// delete
+	public int mana;		// delete
+	public Projectile projectile;
+	public int useCost;				// delete
 
 
 	
@@ -226,7 +230,6 @@ public class Entity {
 		if(dyingCounter > i*6 && dyingCounter <= i*7 ) { changeAlpha(g2, 0f); }
 		if(dyingCounter > i*7 && dyingCounter <= i*8 ) { changeAlpha(g2, 1f); }
 		if(dyingCounter > i*8) {
-			dying = false;
 			alive = false;
 		}
 		

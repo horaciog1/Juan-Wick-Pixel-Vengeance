@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 
 	GamePanel gp;
-	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, shotKeyPressed;
 	
 	public KeyHandler(GamePanel gp) {
 		this.gp = gp;
@@ -125,6 +125,7 @@ public class KeyHandler implements KeyListener{
 		if ( code == KeyEvent.VK_S) { downPressed = true; }
 		if ( code == KeyEvent.VK_D) { rightPressed = true; }
 		if ( code == KeyEvent.VK_P) { gp.gameState = gp.pauseState; }
+		if (code == KeyEvent.VK_ENTER) { shotKeyPressed = true; }
 	} // end playState
 	
 	public void pauseState(int code) {
@@ -155,6 +156,10 @@ public class KeyHandler implements KeyListener{
 		if ( code == KeyEvent.VK_D) {
 			rightPressed = false;
 		}
+		if (code == KeyEvent.VK_ENTER) { 
+			shotKeyPressed = false; 
+		}
+
 		
 		
 	} //  end keyReleased()

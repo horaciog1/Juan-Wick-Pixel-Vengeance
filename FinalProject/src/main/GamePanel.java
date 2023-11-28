@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	//SYSTEM
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler(this);
+	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
 	Sound se = new Sound();
 	public CollisionChecker cChecker = new CollisionChecker(this);
@@ -67,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity obj[] = new Entity[11];  //11 slots for objects
 	public Entity enemy[] = new Entity[20];
 	ArrayList<Entity> entityList = new ArrayList<>();
+	public ArrayList<Entity> projectileList = new ArrayList<>();
 	
 	//GAME STATE
 	public int gameState;
@@ -199,6 +200,18 @@ public class GamePanel extends JPanel implements Runnable{
 				}
 			} // end for
 			
+			// PROJECTILE
+			for (int i = 0; i < projectileList.size(); i++) {
+				if(projectileList.get(i) != null) {
+					if(projectileList.get(i).alive == true) {
+						projectileList.get(i).update();
+					}
+					if(projectileList.get(i).alive == false) {
+						projectileList.remove(i);
+					}
+				}
+			} // end for
+			
 		}// end if
 		
 		if(gameState == pauseState) {
@@ -237,6 +250,12 @@ public class GamePanel extends JPanel implements Runnable{
 			for(int i = 0; i < enemy.length; i++) {
 				if(enemy[i] != null) {
 					entityList.add(enemy[i]);
+				}
+			} //  end for
+			
+			for(int i = 0; i < projectileList.size(); i++) {
+				if(projectileList.get(i) != null) {
+					entityList.add(projectileList.get(i));
 				}
 			} //  end for
 			

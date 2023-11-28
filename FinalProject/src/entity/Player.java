@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 //import main.UtilityTool;
+import object.OBJ_Bullet;
 
 public class Player extends Entity{
 
@@ -73,6 +74,7 @@ public class Player extends Entity{
 		//PLAYER STATUS
 		maxLife = 6;
 		life = maxLife;
+		projectile = new OBJ_Bullet(gp);
 		
 	} // end setDefaultValues()
 	
@@ -165,6 +167,18 @@ public class Player extends Entity{
 		} // end if to stop moving
 		
 		
+		// projectile.alive == false means it can only shot one at a time
+		if (gp.keyH.shotKeyPressed == true && projectile.alive == false) {
+			
+			// Set default coordinates, direction and user
+			projectile.set(worldX, worldY, direction, true, this);
+			
+			// Add it to the list
+			gp.projectileList.add(projectile);
+			gp.playSE(7);
+		}
+		
+		
 		// This needs to be outside of key if statement!!!
 		if( invincible == true) {
 			invincibleCounter++;
@@ -195,7 +209,7 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			
-			if( invincible == false) {
+			if( invincible == false && gp.enemy[i].dying == false) {
 				gp.playSE(10);
 				life -= 1;
 				invincible = true;
