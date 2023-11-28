@@ -19,6 +19,8 @@ public class ENEM_Ninja extends Entity{
 		speed = 4;			// or maybe 6, we'll see
 		maxLife = 4;
 		life = maxLife;
+		attack = 1;
+		defense = 0;
 		
 		solidArea.x = 11;
 		solidArea.y = 10;

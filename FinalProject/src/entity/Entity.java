@@ -45,6 +45,7 @@ public class Entity {
 	public int invincibleCounter = 0;
 	int dyingCounter = 0;
 	int hpBarCounter = 0;
+	public int shotAvailableCounter = 0;
 	
 	//CHARACTER ATTRIBUTES
 	public int maxLife;
@@ -52,10 +53,16 @@ public class Entity {
 	public int type;	// 0 = player, 1 = NPC (if added), 2 = enemy
 	public String name;
 	public int speed; // Movement speed
-	public int maxMana;		// delete
-	public int mana;		// delete
 	public Projectile projectile;
-	public int useCost;				// delete
+	
+	// MAYBE DELETED
+	public int attack;
+	public int defense;
+	
+	// ITEM ATTRIBUTES
+	public int attackValue;
+	public int defenseValue;
+
 
 
 	
@@ -82,7 +89,14 @@ public class Entity {
 			if(gp.player.invincible == false) {
 				// Player can receive damage
 				gp.playSE(10);
-				gp.player.life -= 1;
+				
+				int damage = attack - gp.player.defense;
+				if (damage < 0) {
+					damage = 0;
+				}
+				gp.playSE(10);
+				gp.player.life -= damage;
+				
 				gp.player.invincible = true;
 			}
 		}

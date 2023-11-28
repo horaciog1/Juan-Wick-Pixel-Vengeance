@@ -75,6 +75,8 @@ public class Player extends Entity{
 		maxLife = 6;
 		life = maxLife;
 		projectile = new OBJ_Bullet(gp);
+		attack = 1;								// this defines how much damage the bullets 
+		defense = 0;
 		
 	} // end setDefaultValues()
 	
@@ -106,6 +108,10 @@ public class Player extends Entity{
 	* Updates the player character's position, animation, and interactions.
 	*/
 	public void update() {
+		
+		if (attacking == true) {
+			attacking();
+		}
 		
         // Check if movement keys are pressed
 		if(keyH.upPressed == true || keyH.downPressed == true || 
@@ -168,13 +174,16 @@ public class Player extends Entity{
 		
 		
 		// projectile.alive == false means it can only shot one at a time
-		if (gp.keyH.shotKeyPressed == true && projectile.alive == false) {
+		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 50) {
 			
 			// Set default coordinates, direction and user
 			projectile.set(worldX, worldY, direction, true, this);
 			
 			// Add it to the list
 			gp.projectileList.add(projectile);
+			
+			shotAvailableCounter = 0;
+			
 			gp.playSE(7);
 		}
 		
@@ -188,7 +197,17 @@ public class Player extends Entity{
 			}
 		} // end if
 		
+		if(shotAvailableCounter < 50) {
+			shotAvailableCounter++; 
+		}
+		
 	} // end update()
+	
+	// use knife to do damage to enemies
+	public void attacking() {
+		// Might not be implemented
+	
+	} // end attacking
 	
 	
 	/**
@@ -210,8 +229,12 @@ public class Player extends Entity{
 		if(i != 999) {
 			
 			if( invincible == false && gp.enemy[i].dying == false) {
+				int damage = gp.enemy[i].attack - defense;
+				if (damage < 0) {
+					damage = 0;
+				}
 				gp.playSE(10);
-				life -= 1;
+				life -= damage;
 				invincible = true;
 			} // end if
 			
@@ -227,15 +250,22 @@ public class Player extends Entity{
 			if(gp.enemy[i].invincible == false) {
 				
 				gp.playSE(8);
-				gp.enemy[i].life -= 1;
-				gp.ui.addMessage("1 damage!");
+				
+				int damage = attack - gp.enemy[i].defense;
+				if (damage < 0) {
+					damage = 0;
+				}
+				
+				gp.enemy[i].life -= damage;
+				gp.ui.addMessage("+" + damage + " damage!");
+				
 				gp.enemy[i].invincible = true;
 				gp.enemy[i].damageReaction();	
 				
 				if(gp.enemy[i].life <= 0) {
 					gp.playSE(9);
 					gp.enemy[i].dying = true;
-					gp.ui.addMessage("killed a" + gp.enemy[i].name + "!");
+					gp.ui.addMessage("You have killed a " + gp.enemy[i].name + "!");
 				}
 			}
 		} // end if

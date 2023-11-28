@@ -44,12 +44,16 @@ public class AssetSetter {
 		
 		
 		gp.enemy[i] = new ENEM_Ninja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 24;
-		gp.enemy[i].worldY = gp.tileSize * 5;
+		gp.enemy[i].worldX = gp.tileSize * 14;
+		gp.enemy[i].worldY = gp.tileSize * 7;
 		i++;
 		gp.enemy[i] = new ENEM_Ninja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 22;
-		gp.enemy[i].worldY = gp.tileSize * 8;
+		gp.enemy[i].worldX = gp.tileSize * 11;
+		gp.enemy[i].worldY = gp.tileSize * 2;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 4;
+		gp.enemy[i].worldY = gp.tileSize * 7;
 		i++;
 	
 		

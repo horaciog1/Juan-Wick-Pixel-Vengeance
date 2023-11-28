@@ -20,11 +20,11 @@ public class TileManager {
 		this.gp = gp;
 		
 //**********The number in the array "Tile" in the next line, limits the amount of tiles aka textures**********
-		tile = new Tile[10];	
+		tile = new Tile[18];	
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("/maps/map02.txt");
+		loadMap("/maps/map001.txt");
 	}//End TileManager
 	
 	//Declaration and import of the textures or tiles.
@@ -32,12 +32,34 @@ public class TileManager {
 	public void getTileImage() {
 		
 		// (NUMBER,   NAME,   COLLISION)
-		setup(0, "RedWoodTile", false);
-		setup(1, "WallTile", true);
-		setup(2, "WhiteFloor", false);
-		setup(3, "WhiteWoodTile", false);
-		setup(4, "WindowScreen", true);
-		setup(5, "WindowTile", false);
+//		setup(0, "RedWoodTile", false);
+//		setup(1, "WallTile", true);
+//		setup(2, "WhiteFloor", false);
+//		setup(3, "WhiteWoodTile", false);
+//		setup(4, "WindowScreen", true);
+//		setup(5, "WindowTile", false);
+		
+		setup(0, "Blank", true);
+		setup(1, "BlueFloor", false);
+		setup(2, "carpet", false);
+		setup(3, "CementWall", false);
+		setup(4, "ChessFloor", false);
+		setup(5, "concrete", false);
+		setup(6, "Dirt", false);
+		setup(7, "Grass", false);
+		setup(8, "Gravel", false);
+		setup(9, "GreenTileFloor", false);
+		setup(10, "pinkTile", false);
+		setup(11, "redTile", false);
+		setup(12, "RockWall", false);
+		setup(13, "Water", true);
+		setup(14, "WhiteFloor", false);
+		setup(15, "WhiteWoodTile", false);
+		setup(16, "WindowScreen", false);
+		setup(17, "wood1", false);
+
+
+		
 			
 	}//End getTileImage
 	
