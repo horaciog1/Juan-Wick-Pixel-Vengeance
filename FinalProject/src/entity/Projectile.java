@@ -29,13 +29,19 @@ public class Projectile extends Entity {
 		
 		if(user == gp.player) {
 			int enemyIndex = gp.cChecker.checkEntity(this, gp.enemy);
+			
 			if(enemyIndex != 999) {
 				gp.player.damageEnemy(enemyIndex);
 				alive = false;
 			}
 		}
+		
 		if(user != gp.player) {
-			
+			boolean contactPlayer = gp.cChecker.checkPlayer(this);
+			if(gp.player.invincible == false && contactPlayer == true) {
+				damagePlayer(attack);
+				alive = false;
+			}
 		}
 		
 		switch(direction) {

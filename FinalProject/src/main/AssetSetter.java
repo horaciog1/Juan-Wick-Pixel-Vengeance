@@ -8,6 +8,10 @@ package main;
 import enemy.ENEM_Ninja;
 //import object.OBJ_Door;
 //import object.OBJ_Key;
+import enemy.ENEM_RedNinja;
+import object.OBJ_Door;
+import object.OBJ_Heart;
+import object.OBJ_Key;
 
 public class AssetSetter {
 
@@ -28,13 +32,20 @@ public class AssetSetter {
      * Initializes and sets the initial positions of objects in the game map.
      */	
 	public void setObject() {
-//		gp.obj[0] = new OBJ_Door(gp);
-//		gp.obj[0].worldX = gp.tileSize * 14;
-//		gp.obj[0].worldY = gp.tileSize * 7;
-//		
-//		gp.obj[1] = new OBJ_Key(gp);
-//		gp.obj[1].worldX = gp.tileSize * 10;
-//		gp.obj[1].worldY = gp.tileSize * 3;
+		int i = 0;
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 16;
+		gp.obj[i].worldY = gp.tileSize * 7;
+		i++;
+//		gp.obj[i] = new OBJ_Key(gp);
+//		gp.obj[i].worldX = gp.tileSize * 10;
+//		gp.obj[i].worldY = gp.tileSize * 2;
+//		i++;
+//		gp.obj[i] = new OBJ_Heart(gp);
+//		gp.obj[i].worldX = gp.tileSize * 3;
+//		gp.obj[i].worldY = gp.tileSize * 2;
+//		i++;
+		
 	}// end setObject()
 	
 	
@@ -42,7 +53,7 @@ public class AssetSetter {
 		
 		int i = 0;
 		
-		
+		// NORMAL NINJAS
 		gp.enemy[i] = new ENEM_Ninja(gp);
 		gp.enemy[i].worldX = gp.tileSize * 14;
 		gp.enemy[i].worldY = gp.tileSize * 7;
@@ -56,6 +67,19 @@ public class AssetSetter {
 		gp.enemy[i].worldY = gp.tileSize * 7;
 		i++;
 	
+		// RED NINJAS
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 6;
+		gp.enemy[i].worldY = gp.tileSize * 7;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 8;
+		gp.enemy[i].worldY = gp.tileSize * 7;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 9;
+		gp.enemy[i].worldY = gp.tileSize * 7;
+		i++;
 		
 		
 	} //end setEnemy

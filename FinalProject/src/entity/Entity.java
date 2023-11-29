@@ -50,7 +50,7 @@ public class Entity {
 	//CHARACTER ATTRIBUTES
 	public int maxLife;
 	public int life;
-	public int type;	// 0 = player, 1 = NPC (if added), 2 = enemy
+	public int type;	// 0 = player, 1 = NPC (if added), 2 = enemy,  3 = itemPickup
 	public String name;
 	public int speed; // Movement speed
 	public Projectile projectile;
@@ -72,8 +72,24 @@ public class Entity {
 	
 	
 	// To be overwritten
-	public void setAction() { } // end setAction
-	public void damageReaction() { } // end damageReaction
+	public void setAction() { } 
+	public void damageReaction() { } 
+	public void use(Entity entity) { }
+	public void checkDrop() { }
+	public void dropItem(Entity droppedItem) { 
+		
+		for(int i = 0; i < gp.obj.length; i++ ) {
+			if(gp.obj[i] == null) {
+				gp.obj[i] = droppedItem;
+				gp.obj[i].worldX = worldX;		// Dead enemy's worldX
+				gp.obj[i].worldY = worldY;		// Dead enemy's worldY
+				break;
+			}
+		}
+		
+		
+		
+	} // end dropItem
 	
 	public void update() {
 		setAction();
@@ -86,19 +102,7 @@ public class Entity {
 		
 		// If enemy is having contact with player
 		if(this.type == 2 && contactPlayer == true) {
-			if(gp.player.invincible == false) {
-				// Player can receive damage
-				gp.playSE(10);
-				
-				int damage = attack - gp.player.defense;
-				if (damage < 0) {
-					damage = 0;
-				}
-				gp.playSE(10);
-				gp.player.life -= damage;
-				
-				gp.player.invincible = true;
-			}
+			damagePlayer(attack);
 		}
 		
 		
@@ -133,9 +137,26 @@ public class Entity {
 				invincibleCounter = 0;
 			}
 		} // end if
-		
+		if(shotAvailableCounter < 50) {
+			shotAvailableCounter++; 
+		}
 	} // end update
 	
+	
+	public void damagePlayer(int attack) {
+		if(gp.player.invincible == false) {
+			// Player can receive damage
+			gp.playSE(10);
+			
+			int damage = attack - gp.player.defense;
+			if (damage < 0) {
+				damage = 0;
+			}
+			gp.player.life -= damage;
+			gp.player.invincible = true;
+		}
+
+	} // end damagePlayer
 	
 	public void draw(Graphics2D g2) {
 		
@@ -216,16 +237,21 @@ public class Entity {
 		     worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
 		     worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 		     worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {      
-		   g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+		   g2.drawImage(image, screenX, screenY, null);
 		  }
 		  // If player is around the edge, draw everything
 		  else if(gp.player.worldX < gp.player.screenX ||
 		    gp.player.worldY < gp.player.screenY ||
 		    rightOffset > gp.worldWidth - gp.player.worldX ||
 		    bottomOffset > gp.worldHeight - gp.player.worldY) {
-		   g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null); 
+		   g2.drawImage(image, screenX, screenY, null); 
 		  }
 		  changeAlpha(g2, 1f);
+		  		  
+		  // DEBUG AND CHECK HITBOX 
+//		  g2.setColor(new Color(255,0,30));
+//		  g2.fillRect(screenX, screenY, solidArea.width, solidArea.height);
+		  
 	} // end draw
 	
 	

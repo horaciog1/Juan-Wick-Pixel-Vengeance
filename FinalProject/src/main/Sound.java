@@ -16,7 +16,7 @@ public class Sound {
 		soundURL[1] = getClass().getResource("/sound/backgroundMusic1.wav");
 		soundURL[2] = getClass().getResource("/sound/blocked.wav");
 		soundURL[3] = getClass().getResource("/sound/unlock.wav");
-		soundURL[4] = getClass().getResource("/sound/swordSlash.wav");
+		soundURL[4] = getClass().getResource("/sound/powerup.wav");
 		soundURL[5] = getClass().getResource("/sound/dooropen.wav");
 		soundURL[6] = getClass().getResource("/sound/coin.wav");
 		soundURL[7] = getClass().getResource("/sound/gunshot.wav");

@@ -75,7 +75,7 @@ public class Player extends Entity{
 		maxLife = 6;
 		life = maxLife;
 		projectile = new OBJ_Bullet(gp);
-		attack = 1;								// this defines how much damage the bullets 
+		attack = 1;								// this defines how much damage the bullets give
 		defense = 0;
 		
 	} // end setDefaultValues()
@@ -201,6 +201,10 @@ public class Player extends Entity{
 			shotAvailableCounter++; 
 		}
 		
+		if(life > maxLife) {
+			life = maxLife;
+		}
+		
 	} // end update()
 	
 	// use knife to do damage to enemies
@@ -219,6 +223,31 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			
+			String objectName = gp.obj[i].name;
+
+			switch(objectName) {
+			case "Key":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+
+			case "Door":
+				if(hasKey == 0) {
+					gp.playSE(2);
+					gp.ui.addMessage("You need a key!");
+				}
+				else if(hasKey > 0) {
+					gp.obj[i].use(this);
+					gp.obj[i] = null; // Disappear door if player has key
+				}
+				System.out.println("Key:" + hasKey);
+				break;
+			
+			case "Heart":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+			}// end switch
 			
 		} // end if
 	}// end pickUpObject
@@ -335,7 +364,7 @@ public class Player extends Entity{
 		
 		// Reset alpha
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));		// make player transparent when invincible, he received damage
-
+		
 		
 		// DEBUG
 //		g2.setFont(new Font("Arial", Font.PLAIN, 26));

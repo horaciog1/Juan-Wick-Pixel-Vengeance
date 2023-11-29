@@ -4,28 +4,25 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.OBJ_Heart;
-import object.OBJ_Key;
 import object.OBJ_NinjaStar;
 
-public class ENEM_Ninja extends Entity{
-
+public class ENEM_RedNinja extends Entity {
+	
 	GamePanel gp;
 	
-	public ENEM_Ninja(GamePanel gp) {
+	public ENEM_RedNinja(GamePanel gp) {
 		super(gp);
 		
 		this.gp = gp;
 		
 		type = 2;
-		name = "Ninja";
-		speed = 4;			// or maybe 6, we'll see
-		maxLife = 4;
+		name = "Red Ninja";
+		speed = 5;			// or maybe 6, we'll see
+		maxLife = 6;
 		life = maxLife;
-		attack = 1;
+		attack = 2;
 		defense = 0;
 		projectile = new OBJ_NinjaStar(gp);
-
 		
 		solidArea.x = 11;
 		solidArea.y = 5;
@@ -42,14 +39,14 @@ public class ENEM_Ninja extends Entity{
 		
 		// setupPlayer = setup using the player size, to keep proportions of the ninjas
 		
-		up0 = setup("/enemy/ninja_up_0", gp.tileSize, gp.tileSize);
-		up1 = setup("/enemy/ninja_up_1", gp.tileSize, gp.tileSize);
-		down0 = setup("/enemy/ninja_down_0", gp.tileSize, gp.tileSize);
-		down1 = setup("/enemy/ninja_down_1", gp.tileSize, gp.tileSize);
-		right0 = setup("/enemy/ninja_right_0", gp.tileSize, gp.tileSize);
-		right1 = setup("/enemy/ninja_right_1", gp.tileSize, gp.tileSize);
-		left0 = setup("/enemy/ninja_left_0", gp.tileSize, gp.tileSize);
-		left1 = setup("/enemy/ninja_left_1", gp.tileSize, gp.tileSize);
+		up0 = setup("/enemy/redninja_up_0", gp.tileSize, gp.tileSize);
+		up1 = setup("/enemy/redninja_up_1", gp.tileSize, gp.tileSize);
+		down0 = setup("/enemy/redninja_down_0", gp.tileSize, gp.tileSize);
+		down1 = setup("/enemy/redninja_down_1", gp.tileSize, gp.tileSize);
+		right0 = setup("/enemy/redninja_right_0", gp.tileSize, gp.tileSize);
+		right1 = setup("/enemy/redninja_right_1", gp.tileSize, gp.tileSize);
+		left0 = setup("/enemy/redninja_left_0", gp.tileSize, gp.tileSize);
+		left1 = setup("/enemy/redninja_left_1", gp.tileSize, gp.tileSize);
 		
 	} // end getImage
 	
@@ -88,7 +85,6 @@ public class ENEM_Ninja extends Entity{
 		}
 		
 		
-		
 	} // end setAction
 	
 	public void damageReaction() {
@@ -116,24 +112,6 @@ public class ENEM_Ninja extends Entity{
 		
 	} // end damageReaction
 	
-	public void checkDrop() {
-		
-		
-		// CAST A DIE
-		int i = new Random().nextInt(100)+1;
-		
-		// SET THE ENEMY DROP
-		if(i < 50 ) {
-			dropItem(new OBJ_Key(gp));
-		}
-		if (i >=50 && i < 75) {
-			dropItem(new OBJ_Heart(gp));
-		}
-		if (i >=75 && i < 100) {
-			dropItem(new OBJ_Key(gp));
-		}
-		
-	} // end checkDrop
 	
 	
 	
@@ -151,10 +129,7 @@ public class ENEM_Ninja extends Entity{
 	
 	
 	
-	
-	
-	
-	
-	
+
+
 	
 } // end class
