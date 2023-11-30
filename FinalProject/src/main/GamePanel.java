@@ -98,9 +98,8 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		aSetter.setObject();	// Place objects into the map
 		aSetter.setEnemy();
-//		playMusic(1);
 		gameState = titleState; //changed
-		
+		playMusic(0);
 	} //  end setupGame
 	
 	public void retry() {
@@ -112,6 +111,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void restart() {
 		player.setDefaultValues();
 		aSetter.setEnemy();
+		aSetter.setObject();
 	}
 	
 	// clock that gives life to the game

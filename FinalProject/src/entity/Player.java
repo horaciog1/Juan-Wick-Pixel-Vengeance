@@ -70,9 +70,10 @@ public class Player extends Entity{
 		worldY = gp.tileSize * 6;
 		speed = 4;
 		direction = "down";
+		hasKey = 0;
 		 
 		//PLAYER STATUS
-		maxLife = 6;
+		maxLife = 8;
 		life = maxLife;
 		projectile = new OBJ_Bullet(gp);
 		attack = 1;								// this defines how much damage the bullets give
@@ -103,14 +104,16 @@ public class Player extends Entity{
 			e.printStackTrace();
 		}
 		
-		up0 = setup("/player/gray_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
-		up1 = setup("/player/gray_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
-		down0 = setup("/player/gray_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
-		down1 = setup("/player/gray_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
-		left0 = setup("/player/gray_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
-		left1 = setup("/player/gray_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
-		right0 = setup("/player/gray_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
-		right1 = setup("/player/gray_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		
+			up0 = setup("/player/gray_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/gray_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/gray_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/gray_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/gray_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/gray_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/gray_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/gray_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		
 		
 	}// end getPlayerImage()
 	
@@ -218,6 +221,8 @@ public class Player extends Entity{
 		
 		if (life <= 0 ) {
 			gp.gameState = gp.gameOverState;
+			gp.ui.commandNum = -1;
+			gp.stopMusic();
 			gp.playSE(12);
 		}
 		
@@ -263,10 +268,60 @@ public class Player extends Entity{
 				gp.obj[i].use(this);
 				gp.obj[i] = null;	// make obj disappear
 				break;
+				
+			case "BlueHeart":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+				
+			case "Chest":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+				
+			case "Bullet":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+
+
 			}// end switch
 			
 		} // end if
 	}// end pickUpObject
+	
+	public void changeSkin(int skin) {
+		if(skin == 0) {
+			up0 = setup("/player/gray_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/gray_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/gray_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/gray_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/gray_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/gray_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/gray_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/gray_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		}
+		else if(skin == 1){
+			up0 = setup("/player/blue_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/blue_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/blue_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/blue_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/blue_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/blue_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/blue_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/blue_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		}
+		else {
+			up0 = setup("/player/black_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/black_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/black_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/black_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/black_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/black_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/black_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/black_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		}
+	}
 	
 	
 	public void contactEnemy( int i) {

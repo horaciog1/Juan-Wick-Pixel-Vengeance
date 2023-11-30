@@ -5,7 +5,6 @@ import java.util.Random;
 import entity.Entity;
 import main.GamePanel;
 import object.OBJ_Heart;
-import object.OBJ_Key;
 import object.OBJ_NinjaStar;
 
 public class ENEM_Ninja extends Entity{
@@ -123,15 +122,10 @@ public class ENEM_Ninja extends Entity{
 		int i = new Random().nextInt(100)+1;
 		
 		// SET THE ENEMY DROP
-		if(i < 50 ) {
-			dropItem(new OBJ_Key(gp));
-		}
-		if (i >=50 && i < 75) {
+		if(i < 60 ) {
 			dropItem(new OBJ_Heart(gp));
 		}
-		if (i >=75 && i < 100) {
-			dropItem(new OBJ_Key(gp));
-		}
+		
 		
 	} // end checkDrop
 	

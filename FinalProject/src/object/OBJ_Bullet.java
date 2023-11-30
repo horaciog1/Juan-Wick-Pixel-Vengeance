@@ -1,6 +1,7 @@
 package object;
 
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -26,8 +27,8 @@ public class OBJ_Bullet extends Projectile {
 		solidArea.y = 14;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 30;
-		solidArea.height = 30;
+		solidArea.width = 25;
+		solidArea.height = 25;
 
 	}
 	
@@ -42,9 +43,12 @@ public class OBJ_Bullet extends Projectile {
 		left1 = setup("/projectile/bullet_left_1", gp.tileSize, gp.tileSize);
 
 	
-	
-	
-	
 	} // end getImage
+	
+	public void use (Entity entity) {
+		gp.playSE(4);
+		gp.ui.addMessage("x2 Damage!");
+		gp.player.attack += 2;
+	} //  end use
 
 } // end class

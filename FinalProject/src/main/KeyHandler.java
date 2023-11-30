@@ -81,6 +81,7 @@ public class KeyHandler implements KeyListener{
 					}
 				}
 				if(code == KeyEvent.VK_ENTER) {
+					gp.stopMusic();
 					if(gp.ui.commandNum == 0) {
 						gp.ui.titleScreenState = 1;
 					}
@@ -94,12 +95,14 @@ public class KeyHandler implements KeyListener{
 
 			else if(gp.ui.titleScreenState == 1) {
 				if ( code == KeyEvent.VK_W) {
+					gp.playSE(11);
 					gp.ui.commandNum--;
 					if(gp.ui.commandNum < 0) {
 						gp.ui.commandNum = 3;
 					}
 				}
 				if ( code == KeyEvent.VK_S) {
+					gp.playSE(11);
 					gp.ui.commandNum++;
 					if(gp.ui.commandNum > 3) {
 						gp.ui.commandNum = 0;
@@ -107,22 +110,27 @@ public class KeyHandler implements KeyListener{
 				}
 				if(code == KeyEvent.VK_ENTER) {
 					if(gp.ui.commandNum == 0) {
+						gp.player.changeSkin(0);
 						System.out.println("Gray suit!");
 						gp.gameState = gp.playState;
 						gp.playMusic(1);
+						
 					}
 					if(gp.ui.commandNum == 1) {
+						gp.player.changeSkin(1);
 						System.out.println("Blue suit!");
 						gp.gameState = gp.playState;
 						gp.playMusic(1);
 					}
 					if(gp.ui.commandNum == 2) { 
+						gp.player.changeSkin(3);
 						System.out.println("Black suit!");
 						gp.gameState = gp.playState;
 						gp.playMusic(1);
 					}	
 					if(gp.ui.commandNum == 3) { 
 						gp.ui.titleScreenState = 0;
+						gp.playMusic(0);
 					}	
 				}
 			}
@@ -226,6 +234,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.commandNum == 0) {
 				gp.gameState = gp.playState;
 				gp.retry();
+				gp.playMusic(1);
 			}
 			else if ( gp.ui.commandNum ==1 ) {
 				gp.gameState = gp.titleState;

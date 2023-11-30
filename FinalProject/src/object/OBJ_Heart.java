@@ -24,6 +24,6 @@ public class OBJ_Heart extends Entity {
 	public void use (Entity entity) {
 		gp.playSE(4);
 		gp.ui.addMessage("Life recovered!");
-		life += 2;
+		gp.player.life += 2;
 	} //  end use
 }// end class
