@@ -121,7 +121,7 @@ public void checkDrop() {
 		int i = new Random().nextInt(100)+1;
 		
 		// SET THE ENEMY DROP
-		if(i < 80 ) {
+		if(i <= 80 ) {
 			dropItem(new OBJ_Heart(gp));
 		}
 		

@@ -122,30 +122,12 @@ public class ENEM_Ninja extends Entity{
 		int i = new Random().nextInt(100)+1;
 		
 		// SET THE ENEMY DROP
-		if(i < 60 ) {
+		if(i <= 85 ) {
 			dropItem(new OBJ_Heart(gp));
 		}
 		
 		
 	} // end checkDrop
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -4,7 +4,6 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.OBJ_Heart;
 import object.OBJ_Key;
 
 
@@ -20,7 +19,7 @@ public class ENEM_NinjaDropper extends Entity{
 		type = 2;
 		name = "Ninja";
 		speed = 13;			// or maybe 6, we'll see
-		maxLife = 3;
+		maxLife = 8;
 		life = maxLife;
 		attack = 1;
 		defense = 0;
@@ -110,7 +109,6 @@ public class ENEM_NinjaDropper extends Entity{
 	public void checkDrop() {
 
 		dropItem(new OBJ_Key(gp));
-		dropItem(new OBJ_Heart(gp));
 		
 	} // end checkDrop
 	
