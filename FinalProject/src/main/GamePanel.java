@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int tileSizeHeight = originalTileSizeHeight * scale;
 	public final int tileSize = tileSizeHeight;
 
-	public final int maxScreenCol = 18;
+	public final int maxScreenCol = 22;
 	public final int maxScreenRow = 14;
 	public final int screenWidth = tileSize * maxScreenCol;   // 912 pixels
 	public final int screenHeight = tileSize * maxScreenRow;   // 720 pixels
@@ -43,8 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxWorldRow = 50;
 	public final int worldWidth = tileSize * maxWorldCol;
 	public final int worldHeight = tileSize * maxWorldRow;
-
-
+	
 	
 	// Frames per second
 	int FPS = 60;
@@ -58,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	public EventHandler eHandler = new EventHandler(this);
+	Config config = new Config(this);
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT
@@ -74,6 +74,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
+	public final int optionsState = 3;
+	public final int gameOverState = 4;
 	
 	
 	public GamePanel() {
@@ -100,6 +102,17 @@ public class GamePanel extends JPanel implements Runnable{
 		gameState = titleState; //changed
 		
 	} //  end setupGame
+	
+	public void retry() {
+		player.setDefaultPositions();
+		player.restoreLife();
+		aSetter.setEnemy();
+		player.hasKey = 0;
+	}
+	public void restart() {
+		player.setDefaultValues();
+		aSetter.setEnemy();
+	}
 	
 	// clock that gives life to the game
 	public void startGameThread() {

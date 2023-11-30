@@ -80,6 +80,17 @@ public class Player extends Entity{
 		
 	} // end setDefaultValues()
 	
+	public void setDefaultPositions() {
+		worldX = gp.tileSize * 3;
+		worldY = gp.tileSize * 6;
+		direction = "down";
+	}
+	public void restoreLife() {
+		life = maxLife;
+		invincible = false;
+	}
+	
+	
 	/**
 	 * Loads player character images from resources.
 	 */	
@@ -203,6 +214,11 @@ public class Player extends Entity{
 		
 		if(life > maxLife) {
 			life = maxLife;
+		}
+		
+		if (life <= 0 ) {
+			gp.gameState = gp.gameOverState;
+			gp.playSE(12);
 		}
 		
 	} // end update()
