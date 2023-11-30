@@ -277,6 +277,7 @@ public class Player extends Entity{
 			case "Chest":
 				gp.obj[i].use(this);
 				gp.obj[i] = null;	// make obj disappear
+				gp.gameState = gp.endGameState;
 				break;
 				
 			case "Bullet":

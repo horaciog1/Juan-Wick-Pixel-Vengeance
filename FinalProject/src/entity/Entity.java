@@ -36,7 +36,8 @@ public class Entity {
 	public boolean alive = true;
 	public boolean dying = false;
 	boolean hpBarOn = false;
-
+	
+	
 	
 	// COUNTER
 	public int spriteCounter = 0; // Counter for sprite animation

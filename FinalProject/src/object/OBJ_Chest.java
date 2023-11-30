@@ -14,12 +14,14 @@ public class OBJ_Chest extends Entity{
 		this.gp = gp;
 		name = "Chest";
 		down0 = setup("/objects/chest", gp.tileSize, gp.tileSize);
-		collision = false;;
+		collision = true;
 		
-	}// end OBJ_Door()
+	}// end OBJ_Chest()
 	
 	public void use(Entity entity) {
-			gp.playSE(5);
-			gp.player.hasKey--;
+		gp.stopMusic();
+		gp.playSE(13);
 	} // end use
+	
+	
 }// end class

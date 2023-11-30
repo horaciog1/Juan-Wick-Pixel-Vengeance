@@ -56,6 +56,9 @@ public class KeyHandler implements KeyListener{
 		else if (gp.gameState == gp.gameOverState) {
 			gameOverState(code);
 		}
+		else if(gp.gameState == gp.endGameState) {
+			endGameState(code);
+		}
 	} //  end keyPressed()
 	
 	
@@ -244,6 +247,37 @@ public class KeyHandler implements KeyListener{
 		}
 		
 	} // end gameOverState
+	
+	public void endGameState(int code){
+		
+		if (code == KeyEvent.VK_W) {
+			gp.ui.commandNum--;
+			if(gp.ui.commandNum < 0) {
+				gp.ui.commandNum = 1;
+			}
+			gp.playSE(11);
+		}
+		if (code == KeyEvent.VK_S) {
+			gp.ui.commandNum++;
+			if(gp.ui.commandNum > 1) {
+				gp.ui.commandNum = 0;
+			}
+			gp.playSE(11);
+		}
+		if (code == KeyEvent.VK_ENTER) {
+			if(gp.ui.commandNum == 0 ) {
+				gp.gameState = gp.titleState;
+				gp.ui.titleScreenState = 0;
+				gp.restart();
+				gp.playMusic(0);
+			}
+			else if ( gp.ui.commandNum  == 1 ) {
+				System.exit(0);
+			}
+		}
+		
+	}
+	
 	
 	/**
      * Handles key releases and updates key event states accordingly.
