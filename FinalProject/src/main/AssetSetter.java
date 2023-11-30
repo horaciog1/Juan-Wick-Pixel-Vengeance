@@ -110,63 +110,134 @@ public class AssetSetter {
 		
 		int i = 0;
 		
-		// NORMAL NINJAS
+		// ROOM 1
 		gp.enemy[i] = new ENEM_Ninja(gp);
 		gp.enemy[i].worldX = gp.tileSize * 14;
-		gp.enemy[i].worldY = gp.tileSize * 7;
+		gp.enemy[i].worldY = gp.tileSize * 10;
 		i++;
 		gp.enemy[i] = new ENEM_Ninja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 11;
+		gp.enemy[i].worldX = gp.tileSize * 14;
 		gp.enemy[i].worldY = gp.tileSize * 2;
 		i++;
 		gp.enemy[i] = new ENEM_Ninja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 4;
-		gp.enemy[i].worldY = gp.tileSize * 7;
+		gp.enemy[i].worldX = gp.tileSize * 1;
+		gp.enemy[i].worldY = gp.tileSize * 10;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 3;
+		gp.enemy[i].worldY = gp.tileSize * 1;
+		i++;
+		
+		// ROOM 2
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 18;
+		gp.enemy[i].worldY = gp.tileSize * 9;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 22;
+		gp.enemy[i].worldY = gp.tileSize * 9;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 18;
+		gp.enemy[i].worldY = gp.tileSize * 2;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 30;
+		gp.enemy[i].worldY = gp.tileSize * 3;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 28;
+		gp.enemy[i].worldY = gp.tileSize * 9;
+		i++;
+		
+		// ROOM 3
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 38;
+		gp.enemy[i].worldY = gp.tileSize * 1;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 34;
+		gp.enemy[i].worldY = gp.tileSize * 6;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 45;
+		gp.enemy[i].worldY = gp.tileSize * 2;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 34;
+		gp.enemy[i].worldY = gp.tileSize * 4;
+		i++;
+		
+		// ROOM 4
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 33;
+		gp.enemy[i].worldY = gp.tileSize * 10;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 33;
+		gp.enemy[i].worldY = gp.tileSize * 12;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 34;
+		gp.enemy[i].worldY = gp.tileSize * 15;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 43;
+		gp.enemy[i].worldY = gp.tileSize * 11;
+		i++;
+		
+		// ROOM 5
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 18;
+		gp.enemy[i].worldY = gp.tileSize * 13;
+		i++;
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 19;
+		gp.enemy[i].worldY = gp.tileSize * 14;
+		i++;
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 29;
+		gp.enemy[i].worldY = gp.tileSize * 19;
 		i++;
 		
 		
-		// DROPPER NINJAS
+		// ROOM 6
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 14;
+		gp.enemy[i].worldY = gp.tileSize * 18;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 7;
+		gp.enemy[i].worldY = gp.tileSize * 14;
+		i++;
 		gp.enemy[i] = new ENEM_NinjaDropper(gp);
-		gp.enemy[i].worldX = gp.tileSize * 6;
-		gp.enemy[i].worldY = gp.tileSize * 7;
+		gp.enemy[i].worldX = gp.tileSize * 2;
+		gp.enemy[i].worldY = gp.tileSize * 13;
+		i++;
+		
+		
+		// ROOM 7
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 2;
+		gp.enemy[i].worldY = gp.tileSize * 28;
 		i++;
 		gp.enemy[i] = new ENEM_NinjaDropper(gp);
 		gp.enemy[i].worldX = gp.tileSize * 8;
-		gp.enemy[i].worldY = gp.tileSize * 7;
+		gp.enemy[i].worldY = gp.tileSize * 30;
+		i++;
+		
+		// ROOM 8
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 29;
+		gp.enemy[i].worldY = gp.tileSize * 27;
 		i++;
 		gp.enemy[i] = new ENEM_NinjaDropper(gp);
-		gp.enemy[i].worldX = gp.tileSize * 9;
-		gp.enemy[i].worldY = gp.tileSize * 7;
+		gp.enemy[i].worldX = gp.tileSize * 19;
+		gp.enemy[i].worldY = gp.tileSize * 24;
 		i++;
+
+
 		
-	
-		// RED NINJAS
-		gp.enemy[i] = new ENEM_RedNinja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 6;
-		gp.enemy[i].worldY = gp.tileSize * 7;
-		i++;
-		gp.enemy[i] = new ENEM_RedNinja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 8;
-		gp.enemy[i].worldY = gp.tileSize * 7;
-		i++;
-		gp.enemy[i] = new ENEM_RedNinja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 9;
-		gp.enemy[i].worldY = gp.tileSize * 7;
-		i++;
-		
-		// BLUE NINJAS
-		gp.enemy[i] = new ENEM_BlueNinja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 6;
-		gp.enemy[i].worldY = gp.tileSize * 7;
-		i++;
-		gp.enemy[i] = new ENEM_BlueNinja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 8;
-		gp.enemy[i].worldY = gp.tileSize * 7;
-		i++;
-		gp.enemy[i] = new ENEM_BlueNinja(gp);
-		gp.enemy[i].worldX = gp.tileSize * 9;
-		gp.enemy[i].worldY = gp.tileSize * 7;
-		i++;
 		
 		
 	} //end setEnemy

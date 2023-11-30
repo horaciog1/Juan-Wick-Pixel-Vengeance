@@ -55,7 +55,7 @@ public class UI {
 			
 			
 			OBJ_Key key = new OBJ_Key(gp);
-			keyImage = key.image;
+			keyImage = key.down0;
 			
 			//Create Hud Object
 			Entity heart = new OBJ_Heart(gp);
@@ -78,8 +78,6 @@ public class UI {
 			g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			g2.setColor(Color.black);
 			g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 60F));
-			g2.drawImage(keyImage, gp.tileSize/2, gp.tileSize+5, gp.tileSize - 10, gp.tileSize - 10, null);
-			g2.drawString("x" + gp.player.hasKey, 95, 115);
 			
 			
 			// MESSAGE
@@ -122,6 +120,9 @@ public class UI {
 		
 		//Method to draw player life
 		public void drawPlayerLife() {
+			
+			g2.drawImage(keyImage, 45, 68, gp.tileSize -5, gp.tileSize - 5, null);
+			g2.drawString("x" + gp.player.hasKey, 95, 115);
 			
 			//gp.player.life = 6;
 			

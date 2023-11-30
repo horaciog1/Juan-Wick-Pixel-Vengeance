@@ -1,7 +1,13 @@
 package object;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import entity.Entity;
 import main.GamePanel;
+import main.UtilityTool;
 
 public class OBJ_Key extends Entity {
 	
@@ -15,9 +21,7 @@ public class OBJ_Key extends Entity {
 		type = 3;
 		name = "Key";
 		down0 = setup("/objects/key", gp.tileSize, gp.tileSize);
-		
-		
-		
+				
 		
 	} // end OBJ_Key()
 	
