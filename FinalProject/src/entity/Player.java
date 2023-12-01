@@ -76,7 +76,7 @@ public class Player extends Entity{
 		maxLife = 8;
 		life = maxLife;
 		projectile = new OBJ_Bullet(gp);
-		attack = 1;								// this defines how much damage the bullets give
+		attack = 2;								// this defines how much damage the bullets give
 		defense = 0;
 		
 	} // end setDefaultValues()

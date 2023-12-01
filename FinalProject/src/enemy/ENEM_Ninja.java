@@ -4,6 +4,8 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
+import object.OBJ_BlueHeart;
+import object.OBJ_Bullet;
 import object.OBJ_Heart;
 import object.OBJ_NinjaStar;
 
@@ -19,9 +21,9 @@ public class ENEM_Ninja extends Entity{
 		type = 2;
 		name = "Ninja";
 		speed = 4;			// or maybe 6, we'll see
-		maxLife = 4;
+		maxLife = 2;
 		life = maxLife;
-		attack = 1;
+		attack = 2;
 		defense = 0;
 		projectile = new OBJ_NinjaStar(gp);
 

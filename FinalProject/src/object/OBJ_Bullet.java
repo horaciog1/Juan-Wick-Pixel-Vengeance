@@ -15,8 +15,8 @@ public class OBJ_Bullet extends Projectile {
 		
 		
 		name = "Bullet";
-		speed = 9;
-		maxLife = 80;
+		speed = 20;
+		maxLife = 50;
 		life = maxLife;
 		attack = 1;
 		//useCost = 1;
@@ -33,14 +33,24 @@ public class OBJ_Bullet extends Projectile {
 	}
 	
 	public void getImage() {
-		up0 = setup("/projectile/bullet_up_0", gp.tileSize, gp.tileSize);
-		up1 = setup("/projectile/bullet_up_1", gp.tileSize, gp.tileSize);
-		down0 = setup("/projectile/bullet_down_0", gp.tileSize, gp.tileSize);
-		down1 = setup("/projectile/bullet_down_1", gp.tileSize, gp.tileSize);
-		right0 = setup("/projectile/bullet_right_0", gp.tileSize, gp.tileSize);
-		right1 = setup("/projectile/bullet_right_1", gp.tileSize, gp.tileSize);
-		left0 = setup("/projectile/bullet_left_0", gp.tileSize, gp.tileSize);
-		left1 = setup("/projectile/bullet_left_1", gp.tileSize, gp.tileSize);
+
+		up0 = setup("/bigBullets/bullet_up_0", gp.tileSize, gp.tileSize);
+		up1 = setup("/bigBullets/bullet_up_1", gp.tileSize, gp.tileSize);
+		down0 = setup("/bigBullets/bullet_down_0", gp.tileSize, gp.tileSize);
+		down1 = setup("/bigBullets/bullet_down_1", gp.tileSize, gp.tileSize);
+		right0 = setup("/bigBullets/bullet_right_0", gp.tileSize, gp.tileSize);
+		right1 = setup("/bigBullets/bullet_right_1", gp.tileSize, gp.tileSize);
+		left0 = setup("/bigBullets/bullet_left_0", gp.tileSize, gp.tileSize);
+		left1 = setup("/bigBullets/bullet_left_1", gp.tileSize, gp.tileSize);
+		
+//		up0 = setup("/projectile/bullet_up_0", gp.tileSize, gp.tileSize);
+//		up1 = setup("/projectile/bullet_up_1", gp.tileSize, gp.tileSize);
+//		down0 = setup("/projectile/bullet_down_0", gp.tileSize, gp.tileSize);
+//		down1 = setup("/projectile/bullet_down_1", gp.tileSize, gp.tileSize);
+//		right0 = setup("/projectile/bullet_right_0", gp.tileSize, gp.tileSize);
+//		right1 = setup("/projectile/bullet_right_1", gp.tileSize, gp.tileSize);
+//		left0 = setup("/projectile/bullet_left_0", gp.tileSize, gp.tileSize);
+//		left1 = setup("/projectile/bullet_left_1", gp.tileSize, gp.tileSize);
 
 	
 	} // end getImage

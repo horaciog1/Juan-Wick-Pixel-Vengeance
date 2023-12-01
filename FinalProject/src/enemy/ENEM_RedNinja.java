@@ -4,6 +4,7 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
+import object.OBJ_Bullet;
 import object.OBJ_Heart;
 import object.OBJ_NinjaStar;
 
@@ -18,8 +19,8 @@ public class ENEM_RedNinja extends Entity {
 		
 		type = 2;
 		name = "Red Ninja";
-		speed = 5;			// or maybe 6, we'll see
-		maxLife = 6;
+		speed = 6;			// or maybe 6, we'll see
+		maxLife = 4;
 		life = maxLife;
 		attack = 2;
 		defense = 0;
@@ -122,7 +123,7 @@ public void checkDrop() {
 		
 		// SET THE ENEMY DROP
 		if(i <= 80 ) {
-			dropItem(new OBJ_Heart(gp));
+			dropItem(new OBJ_Bullet(gp));
 		}
 		
 		

@@ -21,9 +21,9 @@ public class ENEM_BlueNinja extends Entity{
 		type = 2;
 		name = "Ninja";
 		speed = 9;			// or maybe 6, we'll see
-		maxLife = 12;
+		maxLife = 6;
 		life = maxLife;
-		attack = 1;
+		attack = 4;
 		defense = 0;
 		projectile = new OBJ_NinjaStar(gp);
 
