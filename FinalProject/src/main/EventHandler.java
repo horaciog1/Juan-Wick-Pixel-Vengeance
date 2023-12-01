@@ -87,6 +87,7 @@ public class EventHandler {
 	public void damagePit(int col, int row) {
 		
 		//gp.gameState = gameState;
+		gp.playSE(8);
 		gp.player.life -= 1;
 	//	eventRect[col][row].eventDone = true;
 		canTouchEvent = false;

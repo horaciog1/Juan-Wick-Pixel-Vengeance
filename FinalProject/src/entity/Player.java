@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 //import main.UtilityTool;
+import object.OBJ_Bullet;
 
 public class Player extends Entity{
 
@@ -69,12 +70,27 @@ public class Player extends Entity{
 		worldY = gp.tileSize * 6;
 		speed = 4;
 		direction = "down";
+		hasKey = 0;
 		 
 		//PLAYER STATUS
-		maxLife = 6;
+		maxLife = 8;
 		life = maxLife;
+		projectile = new OBJ_Bullet(gp);
+		attack = 2;								// this defines how much damage the bullets give
+		defense = 0;
 		
 	} // end setDefaultValues()
+	
+	public void setDefaultPositions() {
+		worldX = gp.tileSize * 3;
+		worldY = gp.tileSize * 6;
+		direction = "down";
+	}
+	public void restoreLife() {
+		life = maxLife;
+		invincible = false;
+	}
+	
 	
 	/**
 	 * Loads player character images from resources.
@@ -88,14 +104,16 @@ public class Player extends Entity{
 			e.printStackTrace();
 		}
 		
-		up0 = setupPlayer("/player/gray_up_0");
-		up1 = setupPlayer("/player/gray_up_1");
-		down0 = setupPlayer("/player/gray_down_0");
-		down1 = setupPlayer("/player/gray_down_1");
-		left0 = setupPlayer("/player/gray_left_0");
-		left1 = setupPlayer("/player/gray_left_1");
-		right0 = setupPlayer("/player/gray_right_0");
-		right1 = setupPlayer("/player/gray_right_1");
+		
+			up0 = setup("/player/gray_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/gray_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/gray_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/gray_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/gray_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/gray_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/gray_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/gray_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		
 		
 	}// end getPlayerImage()
 	
@@ -104,6 +122,10 @@ public class Player extends Entity{
 	* Updates the player character's position, animation, and interactions.
 	*/
 	public void update() {
+		
+		if (attacking == true) {
+			attacking();
+		}
 		
         // Check if movement keys are pressed
 		if(keyH.upPressed == true || keyH.downPressed == true || 
@@ -165,6 +187,21 @@ public class Player extends Entity{
 		} // end if to stop moving
 		
 		
+		// projectile.alive == false means it can only shot one at a time
+		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 50) {
+			
+			// Set default coordinates, direction and user
+			projectile.set(worldX, worldY, direction, true, this);
+			
+			// Add it to the list
+			gp.projectileList.add(projectile);
+			
+			shotAvailableCounter = 0;
+			
+			gp.playSE(7);
+		}
+		
+		
 		// This needs to be outside of key if statement!!!
 		if( invincible == true) {
 			invincibleCounter++;
@@ -174,7 +211,28 @@ public class Player extends Entity{
 			}
 		} // end if
 		
+		if(shotAvailableCounter < 50) {
+			shotAvailableCounter++; 
+		}
+		
+		if(life > maxLife) {
+			life = maxLife;
+		}
+		
+		if (life <= 0 ) {
+			gp.gameState = gp.gameOverState;
+			gp.ui.commandNum = -1;
+			gp.stopMusic();
+			gp.playSE(12);
+		}
+		
 	} // end update()
+	
+	// use knife to do damage to enemies
+	public void attacking() {
+		// Might not be implemented
+	
+	} // end attacking
 	
 	
 	/**
@@ -186,17 +244,98 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			
+			String objectName = gp.obj[i].name;
+
+			switch(objectName) {
+			case "Key":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+
+			case "Door":
+				if(hasKey == 0) {
+					gp.playSE(2);
+					gp.ui.addMessage("You need a key!");
+				}
+				else if(hasKey > 0) {
+					gp.obj[i].use(this);
+					gp.obj[i] = null; // Disappear door if player has key
+				}
+				System.out.println("Key:" + hasKey);
+				break;
+			
+			case "Heart":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+				
+			case "BlueHeart":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+				
+			case "Chest":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				gp.gameState = gp.endGameState;
+				break;
+				
+			case "Bullet":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+
+
+			}// end switch
 			
 		} // end if
 	}// end pickUpObject
+	
+	public void changeSkin(int skin) {
+		if(skin == 0) {
+			up0 = setup("/player/gray_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/gray_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/gray_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/gray_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/gray_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/gray_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/gray_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/gray_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		}
+		else if(skin == 1){
+			up0 = setup("/player/blue_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/blue_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/blue_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/blue_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/blue_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/blue_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/blue_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/blue_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		}
+		else {
+			up0 = setup("/player/black_up_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			up1 = setup("/player/black_up_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down0 = setup("/player/black_down_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			down1 = setup("/player/black_down_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left0 = setup("/player/black_left_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			left1 = setup("/player/black_left_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right0 = setup("/player/black_right_0", gp.tileSizeWidth-4, gp.tileSizeHeight);
+			right1 = setup("/player/black_right_1", gp.tileSizeWidth-4, gp.tileSizeHeight);
+		}
+	}
 	
 	
 	public void contactEnemy( int i) {
 		
 		if(i != 999) {
 			
-			if( invincible == false) {
-				life -= 1;
+			if( invincible == false && gp.enemy[i].dying == false) {
+				int damage = gp.enemy[i].attack - defense;
+				if (damage < 0) {
+					damage = 0;
+				}
+				gp.playSE(10);
+				life -= damage;
 				invincible = true;
 			} // end if
 			
@@ -205,6 +344,33 @@ public class Player extends Entity{
 	} // end  contactEnemy
 	
 	
+	public void damageEnemy(int i)  {
+		
+		if(i != 999) {
+			
+			if(gp.enemy[i].invincible == false) {
+				
+				gp.playSE(8);
+				
+				int damage = attack - gp.enemy[i].defense;
+				if (damage < 0) {
+					damage = 0;
+				}
+				
+				gp.enemy[i].life -= damage;
+				gp.ui.addMessage("+" + damage + " damage!");
+				
+				gp.enemy[i].invincible = true;
+				gp.enemy[i].damageReaction();	
+				
+				if(gp.enemy[i].life <= 0) {
+					gp.playSE(9);
+					gp.enemy[i].dying = true;
+					gp.ui.addMessage("You have killed a " + gp.enemy[i].name + "!");
+				}
+			}
+		} // end if
+	} // end damageEnemy
 	
 	
 	
@@ -221,39 +387,23 @@ public class Player extends Entity{
 		switch(direction) {
 		
 		case "up":
-			if(spriteNum == 1) {
-				image = up0;
-			}
-			if (spriteNum == 2) {
-				image = up1;
-			}
+			if(spriteNum == 1) { image = up0; }
+			if (spriteNum == 2) { image = up1; }
 			break;
 			
 		case "down":
-			if (spriteNum == 1) {
-				image = down0;
-			}
-			if (spriteNum == 2) {
-				image = down1;
-			}
+			if (spriteNum == 1) { image = down0; }
+			if (spriteNum == 2) { image = down1; }
 			break;
 			
 		case "left":
-			if (spriteNum == 1) {
-				image = left0;
-			}
-			if (spriteNum == 2) {
-				image = left1;
-			}
+			if (spriteNum == 1) { image = left0; }
+			if (spriteNum == 2) { image = left1; }
 			break;
 			
 		case "right":
-			if (spriteNum == 1) {
-				image = right0;
-			}
-			if (spriteNum == 2) {
-				image = right1;
-			}
+			if (spriteNum == 1) { image = right0; }
+			if (spriteNum == 2) { image = right1; }
 			break;
 			
 		} // end switch
@@ -279,14 +429,14 @@ public class Player extends Entity{
 		
 		
 		if (invincible == true) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));		// make player transparent when invincible, he received damage
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));		// make player transparent when invincible, he received damage
 		}
 		
 		g2.drawImage(image, x, y, null);
 		
 		// Reset alpha
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));		// make player transparent when invincible, he received damage
-
+		
 		
 		// DEBUG
 //		g2.setFont(new Font("Arial", Font.PLAIN, 26));

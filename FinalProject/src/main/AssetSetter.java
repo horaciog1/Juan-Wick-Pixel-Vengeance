@@ -5,9 +5,12 @@
  */
 package main;
 
+import enemy.ENEM_BlueNinja;
 import enemy.ENEM_Ninja;
-//import object.OBJ_Door;
-//import object.OBJ_Key;
+import enemy.ENEM_NinjaDropper;
+import enemy.ENEM_RedNinja;
+import object.OBJ_Chest;
+import object.OBJ_Door;
 
 public class AssetSetter {
 
@@ -28,28 +31,224 @@ public class AssetSetter {
      * Initializes and sets the initial positions of objects in the game map.
      */	
 	public void setObject() {
-//		gp.obj[0] = new OBJ_Door(gp);
-//		gp.obj[0].worldX = gp.tileSize * 14;
-//		gp.obj[0].worldY = gp.tileSize * 7;
-//		
-//		gp.obj[1] = new OBJ_Key(gp);
-//		gp.obj[1].worldX = gp.tileSize * 10;
-//		gp.obj[1].worldY = gp.tileSize * 3;
+		int i = 0;
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 16;
+		gp.obj[i].worldY = gp.tileSize * 7;
+		i++;	
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 31;
+		gp.obj[i].worldY = gp.tileSize * 6;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 46;
+		gp.obj[i].worldY = gp.tileSize * 8;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 31;
+		gp.obj[i].worldY = gp.tileSize * 15;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 16;
+		gp.obj[i].worldY = gp.tileSize * 16;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 3;
+		gp.obj[i].worldY = gp.tileSize * 20;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 16;
+		gp.obj[i].worldY = gp.tileSize * 29;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 31;
+		gp.obj[i].worldY = gp.tileSize * 28;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 34;
+		gp.obj[i].worldY = gp.tileSize * 31;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 13;
+		gp.obj[i].worldY = gp.tileSize * 38;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 2;
+		gp.obj[i].worldY = gp.tileSize * 41;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 13;
+		gp.obj[i].worldY = gp.tileSize * 45;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 27;
+		gp.obj[i].worldY = gp.tileSize * 45;
+		i++;
+		
+		gp.obj[i] = new OBJ_Door(gp);
+		gp.obj[i].worldX = gp.tileSize * 38;
+		gp.obj[i].worldY = gp.tileSize * 41;
+		i++;
+		
+		gp.obj[i] = new OBJ_Chest(gp);
+		gp.obj[i].worldX = gp.tileSize * 46;
+		gp.obj[i].worldY = gp.tileSize * 48;
+		i++;
+		
+//		gp.obj[i] = new OBJ_Chest(gp);
+//		gp.obj[i].worldX = gp.tileSize * 7;
+//		gp.obj[i].worldY = gp.tileSize * 6;
+//		i++;
+		
+		
 	}// end setObject()
 	
 	
 	public void setEnemy() {
 		
-		gp.enemy[0] = new ENEM_Ninja(gp);
-		gp.enemy[0].worldX = gp.tileSize * 24;
-		gp.enemy[0].worldY = gp.tileSize * 5;
+		int i = 0;
 		
-		gp.enemy[1] = new ENEM_Ninja(gp);
-		gp.enemy[1].worldX = gp.tileSize * 22;
-		gp.enemy[1].worldY = gp.tileSize * 8;
+		// ROOM 1
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 14;
+		gp.enemy[i].worldY = gp.tileSize * 10;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 14;
+		gp.enemy[i].worldY = gp.tileSize * 2;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 1;
+		gp.enemy[i].worldY = gp.tileSize * 10;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 3;
+		gp.enemy[i].worldY = gp.tileSize * 1;
+		i++;
 		
-	
+		// ROOM 2
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 18;
+		gp.enemy[i].worldY = gp.tileSize * 9;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 22;
+		gp.enemy[i].worldY = gp.tileSize * 9;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 18;
+		gp.enemy[i].worldY = gp.tileSize * 2;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 30;
+		gp.enemy[i].worldY = gp.tileSize * 3;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 28;
+		gp.enemy[i].worldY = gp.tileSize * 9;
+		i++;
+		
+		// ROOM 3
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 38;
+		gp.enemy[i].worldY = gp.tileSize * 1;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 34;
+		gp.enemy[i].worldY = gp.tileSize * 6;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 45;
+		gp.enemy[i].worldY = gp.tileSize * 2;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 34;
+		gp.enemy[i].worldY = gp.tileSize * 4;
+		i++;
+		
+		// ROOM 4
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 33;
+		gp.enemy[i].worldY = gp.tileSize * 10;
+		i++;
+		gp.enemy[i] = new ENEM_Ninja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 33;
+		gp.enemy[i].worldY = gp.tileSize * 12;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 34;
+		gp.enemy[i].worldY = gp.tileSize * 15;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 43;
+		gp.enemy[i].worldY = gp.tileSize * 11;
+		i++;
+		
+		// ROOM 5
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 18;
+		gp.enemy[i].worldY = gp.tileSize * 13;
+		i++;
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 19;
+		gp.enemy[i].worldY = gp.tileSize * 14;
+		i++;
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 29;
+		gp.enemy[i].worldY = gp.tileSize * 19;
+		i++;
 		
 		
-	} // end setEnemy
+		// ROOM 6
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 14;
+		gp.enemy[i].worldY = gp.tileSize * 18;
+		i++;
+		gp.enemy[i] = new ENEM_RedNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 7;
+		gp.enemy[i].worldY = gp.tileSize * 14;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 2;
+		gp.enemy[i].worldY = gp.tileSize * 13;
+		i++;
+		
+		
+		// ROOM 7
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 2;
+		gp.enemy[i].worldY = gp.tileSize * 28;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 8;
+		gp.enemy[i].worldY = gp.tileSize * 30;
+		i++;
+		
+		// ROOM 8
+		gp.enemy[i] = new ENEM_BlueNinja(gp);
+		gp.enemy[i].worldX = gp.tileSize * 29;
+		gp.enemy[i].worldY = gp.tileSize * 27;
+		i++;
+		gp.enemy[i] = new ENEM_NinjaDropper(gp);
+		gp.enemy[i].worldX = gp.tileSize * 19;
+		gp.enemy[i].worldY = gp.tileSize * 24;
+		i++;
+
+
+		
+		
+		
+	} //end setEnemy
 } // end class

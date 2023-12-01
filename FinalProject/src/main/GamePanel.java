@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int tileSizeHeight = originalTileSizeHeight * scale;
 	public final int tileSize = tileSizeHeight;
 
-	public final int maxScreenCol = 18;
+	public final int maxScreenCol = 22;
 	public final int maxScreenRow = 14;
 	public final int screenWidth = tileSize * maxScreenCol;   // 912 pixels
 	public final int screenHeight = tileSize * maxScreenRow;   // 720 pixels
@@ -43,36 +43,40 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxWorldRow = 50;
 	public final int worldWidth = tileSize * maxWorldCol;
 	public final int worldHeight = tileSize * maxWorldRow;
-
-
+	
 	
 	// Frames per second
 	int FPS = 60;
 
 	//SYSTEM
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler(this);
+	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
 	Sound se = new Sound();
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	public EventHandler eHandler = new EventHandler(this);
+	Config config = new Config(this);
 	Thread gameThread;
 	
 	// ENTITY AND OBJECT
 	public Player player = new Player(this, keyH);
 	
 	// objects that can be displayed at the same time, it can be change any time to display more objects
-	public Entity obj[] = new Entity[11];  //11 slots for objects
-	public Entity enemy[] = new Entity[20];
+	public Entity obj[] = new Entity[20];  //20 slots for objects
+	public Entity enemy[] = new Entity[50];
 	ArrayList<Entity> entityList = new ArrayList<>();
+	public ArrayList<Entity> projectileList = new ArrayList<>();
 	
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
+	public final int optionsState = 3;
+	public final int gameOverState = 4;
+	public final int endGameState = 5;
 	
 	
 	public GamePanel() {
@@ -95,10 +99,21 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		aSetter.setObject();	// Place objects into the map
 		aSetter.setEnemy();
-//		playMusic(1);
 		gameState = titleState; //changed
-		
+		playMusic(0);
 	} //  end setupGame
+	
+	public void retry() {
+		player.setDefaultPositions();
+		player.restoreLife();
+		aSetter.setEnemy();
+		player.hasKey = 0;
+	}
+	public void restart() {
+		player.setDefaultValues();
+		aSetter.setEnemy();
+		aSetter.setObject();
+	}
 	
 	// clock that gives life to the game
 	public void startGameThread() {
@@ -190,7 +205,25 @@ public class GamePanel extends JPanel implements Runnable{
 			// ENEMY
 			for (int i = 0; i < enemy.length; i++) {
 				if(enemy[i] != null) {
-					enemy[i].update();
+					if(enemy[i].alive == true && enemy[i].dying == false) {
+						enemy[i].update();
+					}
+					if(enemy[i].alive == false) {
+						enemy[i].checkDrop();
+						enemy[i] = null;
+					}
+				}
+			} // end for
+			
+			// PROJECTILE
+			for (int i = 0; i < projectileList.size(); i++) {
+				if(projectileList.get(i) != null) {
+					if(projectileList.get(i).alive == true) {
+						projectileList.get(i).update();
+					}
+					if(projectileList.get(i).alive == false) {
+						projectileList.remove(i);
+					}
 				}
 			} // end for
 			
@@ -232,6 +265,12 @@ public class GamePanel extends JPanel implements Runnable{
 			for(int i = 0; i < enemy.length; i++) {
 				if(enemy[i] != null) {
 					entityList.add(enemy[i]);
+				}
+			} //  end for
+			
+			for(int i = 0; i < projectileList.size(); i++) {
+				if(projectileList.get(i) != null) {
+					entityList.add(projectileList.get(i));
 				}
 			} //  end for
 			

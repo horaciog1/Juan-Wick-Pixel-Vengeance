@@ -5,6 +5,8 @@
 
 package entity;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -18,41 +20,77 @@ import main.UtilityTool;
 public class Entity {
 
 	GamePanel gp;
-	public int worldX, worldY; // Current world position
-	public int speed; // Movement speed
-	
-    // Sprite images for different directions
-	public BufferedImage up0, up1, down0, down1, left0, left1, right0, right1, TitleScreen;	
-	public String direction = "down";  // Current facing direction
-	
-	public int spriteCounter = 0; // Counter for sprite animation
-	public int spriteNum = 1; // Total number of sprites
-	
-    // Hit-box for collision detection (you can overwrite the hit-box on the designated class;) )
-	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+	public BufferedImage up0, up1, down0, down1, left0, left1, right0, right1, TitleScreen;	// Sprite images for different directions
+	public Rectangle solidArea = new Rectangle(0, 0, 48, 48); 	// Hit-box for collision detection (you can overwrite the hit-box on the designated class;) )
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	public boolean collisionOn = false;	// Flag to enable collision detection
-	public int actionLockCounter = 0;
-	public boolean invincible = false;
-	public int invincibleCounter = 0;
 	public BufferedImage image, image2, image3;
-	public String name;
 	public boolean collision = false;
-	public int type;	// 0 = player, 1 = NPC (if added), 2 = enemy
 	
-	//CHARACTER STATUS
+	// STATE
+	public int spriteNum = 1; // Total number of sprites
+	public int worldX, worldY; // Current world position
+	public String direction = "down";  // Current facing direction
+	public boolean collisionOn = false;	// Flag to enable collision detection
+	public boolean invincible = false;
+	boolean attacking = false;
+	public boolean alive = true;
+	public boolean dying = false;
+	boolean hpBarOn = false;
+	
+	
+	
+	// COUNTER
+	public int spriteCounter = 0; // Counter for sprite animation
+	public int actionLockCounter = 0;
+	public int invincibleCounter = 0;
+	int dyingCounter = 0;
+	int hpBarCounter = 0;
+	public int shotAvailableCounter = 0;
+	
+	//CHARACTER ATTRIBUTES
 	public int maxLife;
 	public int life;
+	public int type;	// 0 = player, 1 = NPC (if added), 2 = enemy,  3 = itemPickup
+	public String name;
+	public int speed; // Movement speed
+	public Projectile projectile;
+	
+	// MAYBE DELETED
+	public int attack;
+	public int defense;
+	
+	// ITEM ATTRIBUTES
+	public int attackValue;
+	public int defenseValue;
+
+
+
 	
 	public Entity (GamePanel gp) {
 		this.gp = gp;
 	} // end constructor
 	
 	
-	
-	public void setAction() {
+	// To be overwritten
+	public void setAction() { } 
+	public void damageReaction() { } 
+	public void use(Entity entity) { }
+	public void checkDrop() { }
+	public void dropItem(Entity droppedItem) { 
 		
-	} // end setAction
+		for(int i = 0; i < gp.obj.length; i++ ) {
+			if(gp.obj[i] == null) {
+				gp.obj[i] = droppedItem;
+				gp.obj[i].worldX = worldX;		// Dead enemy's worldX
+				gp.obj[i].worldY = worldY;		// Dead enemy's worldY
+				break;
+			}
+		}
+		
+		
+		
+	} // end dropItem
+	
 	public void update() {
 		setAction();
 		
@@ -64,11 +102,7 @@ public class Entity {
 		
 		// If enemy is having contact with player
 		if(this.type == 2 && contactPlayer == true) {
-			if(gp.player.invincible == false) {
-				// Player can receive damage
-				gp.player.life -= 1;
-				gp.player.invincible = true;
-			}
+			damagePlayer(attack);
 		}
 		
 		
@@ -96,8 +130,33 @@ public class Entity {
 			spriteCounter = 0;
 		} // end if spriteCounter > 12		
 		
+		if( invincible == true) {
+			invincibleCounter++;
+			if(invincibleCounter > 40) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		} // end if
+		if(shotAvailableCounter < 50) {
+			shotAvailableCounter++; 
+		}
 	} // end update
 	
+	
+	public void damagePlayer(int attack) {
+		if(gp.player.invincible == false) {
+			// Player can receive damage
+			gp.playSE(10);
+			
+			int damage = attack - gp.player.defense;
+			if (damage < 0) {
+				damage = 0;
+			}
+			gp.player.life -= damage;
+			gp.player.invincible = true;
+		}
+
+	} // end damagePlayer
 	
 	public void draw(Graphics2D g2) {
 		
@@ -124,63 +183,114 @@ public class Entity {
 		  
 		  switch(direction) {
 		  case "up":
-		   if(spriteNum == 1) {
-		    image = up0;
-		   }
-		   if(spriteNum == 2) {
-		    image = up1;
-		   }
+		   if(spriteNum == 1) { image = up0; }
+		   if(spriteNum == 2) { image = up1; }
 		   break;
 		  case "down":
-		   if(spriteNum == 1) {
-		    image = down0;
-		   }
-		   if(spriteNum == 2) {
-		    image = down1;
-		   }
+		   if(spriteNum == 1) { image = down0; }
+		   if(spriteNum == 2) { image = down1; }
 		   break;
 		  case "left":
-		   if(spriteNum == 1) {
-		    image = left0;    
-		   }   
-		   if(spriteNum == 2) {
-		    image = left1;
-		   }
+		   if(spriteNum == 1) { image = left0; }   
+		   if(spriteNum == 2) { image = left1; }
 		   break;
 		  case "right":
-		   if(spriteNum == 1) {
-		    image = right0;
-		   }   
-		   if(spriteNum == 2) {
-		    image = right1;
-		   }
+		   if(spriteNum == 1) { image = right0; }   
+		   if(spriteNum == 2) { image = right1; }
 		   break;
+		  }
+		  
+		  
+		  // Enemy HP bar
+		  if(type == 2 && hpBarOn == true) {
+			  
+			  double oneScale = (double)gp.tileSize / maxLife;
+			  double hpBarValue = oneScale*life;
+			  
+			  g2.setColor(new Color(35, 35, 35));
+			  g2.fillRect(screenX - 1, screenY - 16, gp.tileSize + 2, 12);
+			  
+			  g2.setColor(new Color(255,0,30));
+			  g2.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);  
+			  
+			  hpBarCounter++;
+			  
+			  if(hpBarCounter > 600) {		// after 10 sec, the bar disappears
+				  hpBarCounter = 0;
+				  hpBarOn = false;
+			  }
+		  } // end if
+		  
+		  
+		  
+		  if (invincible == true) {
+			  hpBarOn = true;
+			  hpBarCounter = 0;
+			  changeAlpha(g2, 0.4f);	// make enemy transparent when invincible, he received damage
+		  }
+		  
+		  if(dying == true) {
+			  dyingAnimation(g2);
 		  }
 		  
 		  if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
 		     worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
 		     worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 		     worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {      
-		   g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+		   g2.drawImage(image, screenX, screenY, null);
 		  }
 		  // If player is around the edge, draw everything
 		  else if(gp.player.worldX < gp.player.screenX ||
 		    gp.player.worldY < gp.player.screenY ||
 		    rightOffset > gp.worldWidth - gp.player.worldX ||
 		    bottomOffset > gp.worldHeight - gp.player.worldY) {
-		   g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null); 
+		   g2.drawImage(image, screenX, screenY, null); 
 		  }
-		
+		  changeAlpha(g2, 1f);
+		  		  
+		  // DEBUG AND CHECK HITBOX 
+//		  g2.setColor(new Color(255,0,30));
+//		  g2.fillRect(screenX, screenY, solidArea.width, solidArea.height);
+		  
 	} // end draw
 	
-	public BufferedImage setup(String imagePath) {
+	
+	public void dyingAnimation(Graphics2D g2) {
+		
+		dyingCounter++;
+		
+		int i = 5;
+		
+		if(dyingCounter <= i ) { changeAlpha(g2, 0f); }
+		if(dyingCounter > i && dyingCounter <= i*2 ) { changeAlpha(g2, 1f); }
+		if(dyingCounter > i*2 && dyingCounter <= i*3 ) { changeAlpha(g2, 0f); }
+		if(dyingCounter > i*3 && dyingCounter <= i*4 ) { changeAlpha(g2, 1f); }
+		if(dyingCounter > i*4 && dyingCounter <= i*5 ) { changeAlpha(g2, 0f); }
+		if(dyingCounter > i*5 && dyingCounter <= i*6 ) { changeAlpha(g2, 1f); }
+		if(dyingCounter > i*6 && dyingCounter <= i*7 ) { changeAlpha(g2, 0f); }
+		if(dyingCounter > i*7 && dyingCounter <= i*8 ) { changeAlpha(g2, 1f); }
+		if(dyingCounter > i*8) {
+			alive = false;
+		}
+		
+	} // end dyingAnimation
+	
+	
+	public void changeAlpha(Graphics2D g2, float alphaValue) {
+		
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
+		
+	} // end changeAlpha
+	
+	
+	public BufferedImage setup(String imagePath, int width, int height) {
 		
 		UtilityTool uTool = new UtilityTool();
 		BufferedImage image = null;
 		
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
-			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+			image = uTool.scaleImage(image, width, height);
 			
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -189,19 +299,19 @@ public class Entity {
 	} // end setup
 	
 	
-	public BufferedImage setupPlayer(String imagePath) {
-		
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage image = null;
-		
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
-			image = uTool.scaleImage(image, gp.tileSizeWidth-4, gp.tileSizeHeight);	
-			// used to be only gp.tileSizeWidth, changed after size of window changed
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-		return image;
-	} // end setup
+//	public BufferedImage setupPlayer(String imagePath) {
+//		
+//		UtilityTool uTool = new UtilityTool();
+//		BufferedImage image = null;
+//		
+//		try {
+//			image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+//			image = uTool.scaleImage(image, gp.tileSizeWidth-4, gp.tileSizeHeight);	
+//			// used to be only gp.tileSizeWidth, changed after size of window changed
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
+//		return image;
+//	} // end setup
 	
 } // end class
