@@ -5,9 +5,9 @@ import java.util.Random;
 import entity.Entity;
 import main.GamePanel;
 import object.OBJ_BlueHeart;
-import object.OBJ_Bullet;
 import object.OBJ_Heart;
 import object.OBJ_NinjaStar;
+import object.OBJ_Shotgun;
 
 public class ENEM_BlueNinja extends Entity{
 
@@ -130,8 +130,8 @@ public class ENEM_BlueNinja extends Entity{
 		else if ( i >= 50 && i < 75) {
 			dropItem(new OBJ_BlueHeart(gp));
 		}
-		else if ( i >= 75 && i < 100) {
-			dropItem(new OBJ_Bullet(gp));
+		else if ( i >= 75 && i < 90) {
+			dropItem(new OBJ_Shotgun(gp));
 		}
 		
 	} // end checkDrop

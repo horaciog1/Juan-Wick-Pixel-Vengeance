@@ -198,7 +198,14 @@ public class Player extends Entity{
 			
 			shotAvailableCounter = 0;
 			
-			gp.playSE(7);
+			if(attack == 2) {
+				gp.playSE(7);
+			}
+			else {
+				gp.playSE(14);
+			}
+			
+			
 		}
 		
 		
@@ -280,7 +287,12 @@ public class Player extends Entity{
 				gp.gameState = gp.endGameState;
 				break;
 				
-			case "Bullet":
+			case "Shotgun":
+				gp.obj[i].use(this);
+				gp.obj[i] = null;	// make obj disappear
+				break;
+				
+			case "Shoes":
 				gp.obj[i].use(this);
 				gp.obj[i] = null;	// make obj disappear
 				break;

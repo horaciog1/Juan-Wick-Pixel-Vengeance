@@ -1,7 +1,6 @@
 package object;
 
 
-import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -55,10 +54,5 @@ public class OBJ_Bullet extends Projectile {
 	
 	} // end getImage
 	
-	public void use (Entity entity) {
-		gp.playSE(4);
-		gp.ui.addMessage("x2 Damage!");
-		gp.player.attack += 2;
-	} //  end use
 
 } // end class

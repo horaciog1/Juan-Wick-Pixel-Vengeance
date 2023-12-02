@@ -19,7 +19,7 @@ public class ENEM_NinjaDropper extends Entity{
 		type = 2;
 		name = "Ninja";
 		speed = 13;			// or maybe 6, we'll see
-		maxLife = 4;
+		maxLife = 5;
 		life = maxLife;
 		attack = 1;
 		defense = 0;

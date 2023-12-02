@@ -4,8 +4,6 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
-import object.OBJ_BlueHeart;
-import object.OBJ_Bullet;
 import object.OBJ_Heart;
 import object.OBJ_NinjaStar;
 
@@ -124,7 +122,7 @@ public class ENEM_Ninja extends Entity{
 		int i = new Random().nextInt(100)+1;
 		
 		// SET THE ENEMY DROP
-		if(i <= 85 ) {
+		if(i <= 40 ) {
 			dropItem(new OBJ_Heart(gp));
 		}
 		
