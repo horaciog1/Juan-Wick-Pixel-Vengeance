@@ -14,8 +14,8 @@ public class OBJ_Bullet extends Projectile {
 		
 		
 		name = "Bullet";
-		speed = 20;
-		maxLife = 50;
+		speed = 22;
+		maxLife = 23;
 		life = maxLife;
 		attack = 1;
 		//useCost = 1;

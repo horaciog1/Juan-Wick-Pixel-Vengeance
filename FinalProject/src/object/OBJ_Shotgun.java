@@ -17,8 +17,9 @@ public class OBJ_Shotgun extends Entity{
 	
 	public void use (Entity entity) {
 		gp.playSE(4);
-		gp.ui.addMessage("x2 Damage!");
-		gp.player.attack += 2;
+		gp.ui.addMessage("Damage increased!");
+		gp.player.attack += 1;
+		
 	} //  end use
 
 }
