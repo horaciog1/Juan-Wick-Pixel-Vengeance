@@ -21,11 +21,11 @@ The Pixel Masters Game is an exciting 2D pixel-based game inspired by the world 
 ## Features
 
 - **Character Customization**: Choose different Juan Wick skins for character customization.
-- **Unique Maps**: Each level features distinct maps with different terrains, buildings, and landmarks.
-- **Background Story**: Engage players with background stories and quick summaries between levels.
-- **Multiplayer Mode**: Play with colleagues in split-screen mode to complete tasks as a team.
-- **Tutorial**: Access a tutorial to learn game mechanics, controls, and techniques.
-- **Weapon Customization**: Customize weapons with various modifications for different gameplay experiences.
+- **Unique Maps**: Each level features distinct maps with different terrains, buildings, and landmarks. -Future Work-
+- **Background Story**: Engage players with background stories and quick summaries between levels.   -Future Work-
+- **Multiplayer Mode**: Play with colleagues in split-screen mode to complete tasks as a team.   -Future Work-
+- **Controls Explained**: Access the controls to learn game controls.
+- **Weapon Customization**: Customize weapons with various modifications for different gameplay experiences.   -Future Work-
 
 ## Getting Started
 
@@ -50,12 +50,12 @@ Follow these instructions to get the Pixel Masters Game running on your local ma
    
    ```bash
    cd cs371-fa2023-teamproject-pixel-masters/FinalProject/
-
+   ```
 2. Compile game:
 
    ```bash
    javac -d bin -sourcepath src src/main/Main.java
-
+   ```
 3. Run the game:
    
    a) Running on a Windows System
