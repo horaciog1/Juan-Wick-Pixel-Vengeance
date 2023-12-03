@@ -56,20 +56,16 @@ Follow these instructions to get the Pixel Masters Game running on your local ma
    ```bash
    javac -d bin -sourcepath src src/main/Main.java
 
-3. Navigate to bin folder:
-
-   ```bash
-   cd bin/
+3. Run the game:
    
-4. Run the game:
-
+   a) Running on a Windows System
    ```bash
-   /Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java \
-   -Dfile.encoding=UTF-8 \
-   -Dstdout.encoding=UTF-8 \
-   -Dstderr.encoding=UTF-8 \
-   -classpath /Users/horaciogonzalez/git/cs371-fa2023-teamproject-pixel-masters/FinalProject/bin \
-   -XX:+ShowCodeDetailsInExceptionMessages main.Main
+   java -cp "bin;res" main.Main
+   ```
+   b) Running on a Unix System
+   ```bash
+   java -cp bin:res main.Main
+   ```
 
 ## Contributing
 
