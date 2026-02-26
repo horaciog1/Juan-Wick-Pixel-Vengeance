@@ -1,85 +1,143 @@
-<h1 align="center">  Juan Wick: Pixel Vengeance </h1>
+<div align="center">
 
-<p align="center"> Welcome to the Pixel Masters Game project repository! This repository hosts the source code for our game based on the John Wick universe.</p>
+# 🔫 Juan Wick: Pixel Vengeance
+### Pixel Masters Game Project
 
-<div align="center"><img src="Readme head.png" alt="Pixel Heads"></div>
+_An intense 2D pixel-art action game inspired by the John Wick universe. Survive waves of enemies, customize your character, and seek vengeance in this retro-styled adventure._
 
+<img src="Readme head.png" alt="Pixel Heads">
 
-## Table of Contents
+[![Last Commit](https://img.shields.io/badge/last%20commit-today-brightgreen)](https://github.com/NMSU-CS-CS371/cs371-fa2023-teamproject-pixel-masters)
+[![Languages](https://img.shields.io/badge/languages-1-blue)]()
+[![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk&logoColor=white)](https://jdk.java.net/21/)
+</div>
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Show your support](#show-your-support)
+---
 
-## Project Overview
+## 📚 Table of Contents
 
-The Pixel Masters Game is an exciting 2D pixel-based game inspired by the world of John Wick. Players will experience challenging rounds where they must survive and defeat various enemies to progress. This README provides a comprehensive overview of the project, its features, and how to get started.
+- [✨ Features](#features)
+- [🏗️ Project Structure](#project-structure)
+- [🎮 Controls](#controls)
+- [⚙️ Setup Instructions](#setup-instructions)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Game](#running-the-game)
+- [👥 Authors](#authors)
+- [🤝 Contributing](#contributing)
 
-## Features
+---
 
-- **Character Customization**: Choose different Juan Wick skins for character customization.
-- **Unique Maps**: Each level features distinct maps with different terrains, buildings, and landmarks. -Future Work-
-- **Background Story**: Engage players with background stories and quick summaries between levels.   -Future Work-
-- **Multiplayer Mode**: Play with colleagues in split-screen mode to complete tasks as a team.   -Future Work-
-- **Controls Explained**: Access the controls to learn game controls.
-- **Weapon Customization**: Customize weapons with various modifications for different gameplay experiences.   -Future Work-
+<a id="features"></a>
+## ✨ Features
 
-## Getting Started
+- 🕴️ **Character Customization**: Choose from different Juan Wick skins (Gray, Blue, Black suits).
+- 🚧 **Unique Maps** (Under Development): Battle across distinct terrains and levels.
+- 🚧 **Background Story** (Under Development): Engage with the lore of the pixelated underworld.
+- 🔫 **Action-Packed Gameplay**: Fast-paced combat mechanics.
+- 🎵 **Immersive Audio**: Sound effects and music to enhance the atmosphere.
 
-Follow these instructions to get the Pixel Masters Game running on your local machine.
+<a id="project-structure"></a>
+## 🏗️ Project Structure
+
+```bash
+├── FinalProject/
+│   ├── src/             # Source code
+│   │   ├── main/        # Core game loop, UI, KeyHandler
+│   │   ├── entity/      # Player, Enemy, Entity classes
+│   │   ├── object/      # Game objects
+│   │   └── tile/        # Map and Tile management
+│   ├── res/             # Resources (Images, Sounds, Maps)
+│   └── bin/             # Compiled classes (generated)
+├── sprites/             # Additional sprite assets
+└── Readme head.png      # Repository banner
+```
+
+<a id="controls"></a>
+## 🎮 Controls
+
+Master the controls to survive the onslaught!
+
+### Menu Navigation
+- **W / S**: Navigate Menu Options
+- **ENTER**: Select Option
+
+### In-Game Actions
+- **W / A / S / D**: Move Player (Up, Left, Down, Right)
+- **ENTER**: Shoot / Attack
+- **P**: Pause Game
+- **ESCAPE**: Open Options Menu
+
+### Options Menu
+- **W / S**: Navigate Settings
+- **A / D**: Adjust Volume
+- **ESCAPE**: Return to Game
+
+<a id="setup-instructions"></a>
+## ⚙️ Setup Instructions
 
 ### Prerequisites
-
-- Java Development Kit (JDK)
-- A computer with at least 5GB of RAM
-- A keyboard for game controls
+- **Java Development Kit (JDK) 21**: Ensure Java is installed and configured in your PATH.
+- **Git**: To clone the repository.
 
 ### Installation
 
-1. Clone the repository:
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/NMSU-CS-CS371/cs371-fa2023-teamproject-pixel-masters.git
+    cd cs371-fa2023-teamproject-pixel-masters
+    ```
 
-   ```bash
-   git clone https://github.com/NMSU-CS-CS371/cs371-fa2023-teamproject-pixel-masters.git
+2.  **Navigate to the project directory**:
+    ```bash
+    cd FinalProject
+    ```
 
-## Usage 
+3.  **Compile the source code**:
+    Ensure the `bin` directory exists:
+    ```bash
+    mkdir bin
+    ```
+    Then compile:
+    ```bash
+    javac -d bin -sourcepath src src/main/Main.java
+    ```
 
-1. Navigate to the main folder:
-   
-   ```bash
-   cd cs371-fa2023-teamproject-pixel-masters/FinalProject/
-   ```
-2. Compile game:
+### Running the Game
 
-   ```bash
-   javac -d bin -sourcepath src src/main/Main.java
-   ```
-3. Run the game:
-   
-   a) Running on a Windows System
-   ```bash
-   java -cp "bin;res" main.Main
-   ```
-   b) Running on a Unix System
-   ```bash
-   java -cp bin:res main.Main
-   ```
+**On Windows:**
+```bash
+java -cp "bin;res" main.Main
+```
 
-## Contributing
+**On Unix/Linux/macOS:**
+```bash
+java -cp bin:res main.Main
+```
 
-We welcome contributions! If you want to contribute to this project, please follow these steps:
+<a id="authors"></a>
+## 👥 Authors
 
-1. Fork this repository.
-2. Create a branch for your feature: ``git checkout -b feature-name.``
-3. Commit your changes: ``git commit -m 'Add new feature'.``
-4. Push to the branch: ``git push origin feature-name.``
-5. Submit a pull request.
-   
+This game was developed as a class project for **CSCI 3710 Software Development** @ NMSU.
 
-## Show your support
+Developed by:
+- **Carlos Torres**
+- **Erick Lopez**
+- **Erick Nevarez**
+- **Horacio Gonzalez**
 
-Dont forget to give a ⭐️ to this project ... Happy coding!
+<a id="contributing"></a>
+## 🤝 Contributing
 
+We welcome contributions!
 
+1.  Fork this repository.
+2.  Create a branch: `git checkout -b feature-name`
+3.  Commit changes: `git commit -m 'Add new feature'`
+4.  Push to branch: `git push origin feature-name`
+5.  Submit a pull request.
+
+---
+<div align="center">
+⭐ Don't forget to give a star if you like this project!
+</div>
