@@ -118,11 +118,13 @@ java -cp bin:res main.Main
 <a id="authors"></a>
 ## 👥 Authors
 
+This game was developed as a class project for **CSCI 3710 Software Development**.
+
 Developed by:
-- **Horacio Gonzalez**
 - **Carlos Torres**
-- **Erick Nevarez**
 - **Erick Lopez**
+- **Erick Nevarez**
+- **Horacio Gonzalez**
 
 <a id="contributing"></a>
 ## 🤝 Contributing
