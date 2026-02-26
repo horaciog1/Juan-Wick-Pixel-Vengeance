@@ -118,7 +118,7 @@ java -cp bin:res main.Main
 <a id="authors"></a>
 ## 👥 Authors
 
-This game was developed as a class project for **CSCI 3710 Software Development**.
+This game was developed as a class project for **CSCI 3710 Software Development** @ NMSU.
 
 Developed by:
 - **Carlos Torres**
