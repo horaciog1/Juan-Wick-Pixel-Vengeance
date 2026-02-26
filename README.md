@@ -32,8 +32,8 @@ _An intense 2D pixel-art action game inspired by the John Wick universe. Survive
 ## ✨ Features
 
 - 🕴️ **Character Customization**: Choose from different Juan Wick skins (Gray, Blue, Black suits).
-- 🗺️ **Unique Maps**: Battle across distinct terrains and levels.
-- 📖 **Background Story**: Engage with the lore of the pixelated underworld.
+- 🚧 **Unique Maps** (Under Development): Battle across distinct terrains and levels.
+- 🚧 **Background Story** (Under Development): Engage with the lore of the pixelated underworld.
 - 🔫 **Action-Packed Gameplay**: Fast-paced combat mechanics.
 - 🎵 **Immersive Audio**: Sound effects and music to enhance the atmosphere.
 
@@ -42,15 +42,15 @@ _An intense 2D pixel-art action game inspired by the John Wick universe. Survive
 
 ```bash
 ├── FinalProject/
-│   ├── src/             # 🧠 Source code
+│   ├── src/             # Source code
 │   │   ├── main/        # Core game loop, UI, KeyHandler
 │   │   ├── entity/      # Player, Enemy, Entity classes
 │   │   ├── object/      # Game objects
 │   │   └── tile/        # Map and Tile management
-│   ├── res/             # 🎨 Resources (Images, Sounds, Maps)
-│   └── bin/             # 📦 Compiled classes (generated)
-├── sprites/             # 🖼️ Additional sprite assets
-└── Readme head.png      # 📸 Repository banner
+│   ├── res/             # Resources (Images, Sounds, Maps)
+│   └── bin/             # Compiled classes (generated)
+├── sprites/             # Additional sprite assets
+└── Readme head.png      # Repository banner
 ```
 
 <a id="controls"></a>
@@ -118,7 +118,11 @@ java -cp bin:res main.Main
 <a id="authors"></a>
 ## 👥 Authors
 
-Developed by the **Pixel Masters** team @ **NMSU**.
+Developed by:
+- **Horacio Gonzalez**
+- **Carlos Torres**
+- **Erick Nevarez**
+- **Erick Lopez**
 
 <a id="contributing"></a>
 ## 🤝 Contributing
